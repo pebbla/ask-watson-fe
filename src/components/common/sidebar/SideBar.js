@@ -27,12 +27,12 @@ function SideBar() {
                     {menus.map((menu, index) => {
                         return (
                             <NavLink
-                                exact 
+                                exact="true"
                                 style={{color:"#B7B7B7", textDecoration:"none"}}
                                 to={menu.path}
                                 key={index}
                                 className="menu-item"
-                                activeClassName="active"
+                                activeclassname="active"
                             >
                                 <h2>{menu.name}</h2>
                             </NavLink>
