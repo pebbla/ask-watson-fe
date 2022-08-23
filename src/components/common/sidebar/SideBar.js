@@ -1,13 +1,7 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import watson_logo from '../../../assets/watson_with_left_hand_up.png';
 import "./SideBar.scss"
-
-const activeTab = (history, path) => {
-    if (history.location.pathname === path) {
-      return { color: "black" };
-    }
-  };
 
 function SideBar() {
     const menus = [
@@ -21,10 +15,12 @@ function SideBar() {
 
     return (
         <div className="side-bar">
-            <div className="welcome-message">
-                <img src={watson_logo} className="watson-logo" alt="watson-logo" />
-                <h1>ASK WATSON</h1>
-            </div>
+            <Link to="/cafe">
+                <div className="welcome-message">
+                    <img src={watson_logo} className="watson-logo" alt="watson-logo" />
+                    <h1>ASK WATSON</h1>
+                </div>
+            </Link>
             <hr />
             <div className="menu">
                 <div className="menu-item">

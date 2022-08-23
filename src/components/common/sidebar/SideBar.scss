@@ -2,7 +2,7 @@
 
 .side-bar {
     background-color: rgb(255, 255, 255);
-    width: 215px;
+    width: $sidebar-width;
     margin: 0;
     position: fixed;
     height: 100%;
@@ -49,8 +49,8 @@
 
 .log-out {
     position: fixed;
-    bottom: 6px;
-    left: 7px;
+    bottom: 10px;
+    left: 14px;
     color: #7D7D7D;
     font-size: 10pt;
     text-decoration: underline $grey;
