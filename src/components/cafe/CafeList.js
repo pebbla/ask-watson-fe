@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import GridLayout from "react-grid-layout";
 import axios from "axios";
 import Cafe from "./Cafe";
-import CafeSearchBar from "../searchbar/CafeSearchBar"
 import "./CafeList.scss"
 
 function CafeList() {
@@ -25,23 +25,15 @@ function CafeList() {
             })
     };
 
-    return <div className="cafe-list__layout">
-        <CafeSearchBar />
+    return <div className="cafe-list-layout">
+        {/* <GridLayout cols={12} rowHeight={30} width={1200}> */}
         {cafeListData.map((cafe) => {
             return <Cafe 
                 key = {cafe.id}
-                id = {cafe.id}
-                cafeName = {cafe.cafeName}
-                cafePhoneNum = {cafe.cafePhoneNum}
-                isEnglishPossible = {cafe.isEnglishPossible}
-                website = {cafe.website}
-                address = {cafe.address}
-                rating = {cafe.rating}
-                reviewCount = {cafe.reviewCount}
-                companyId = {cafe.company.id}
-                locationId = {cafe.location.id}
+                cafe = {cafe}
             />
         })}
+        {/* </GridLayout> */}
     </div>
 }
 
