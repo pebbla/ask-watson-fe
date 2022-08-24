@@ -5,9 +5,9 @@ var config = {
   };
 
 const getCafes = async () => {
-    await axios.get("/cafes", config)
+    await axios.get("/admin/cafes", config)
         .then((response) => {
-            return response.data['content'];
+            return response.data['dataList'];
         })
         .catch((error) => {
             console.error("ERROR: " + error);

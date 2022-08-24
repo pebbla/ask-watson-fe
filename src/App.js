@@ -2,7 +2,7 @@
 import React from "react";
 import SideBar from "./components/common/sidebar/SideBar";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
-import Cafe from "./pages/cafe/Cafe";
+import CafePage from "./pages/cafe/CafePage";
 import "./App.css";
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
     <BrowserRouter>
       <SideBar />
       <Routes>
-        <Route exact path="/" element={<Cafe />} />
-        <Route path="/cafe" element={<Cafe />} />
+        <Route exact path="/" element={<CafePage />} />
+        <Route path="/cafe" element={<CafePage />} />
       </Routes>
     </BrowserRouter>
   );

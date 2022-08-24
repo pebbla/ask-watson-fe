@@ -1,0 +1,55 @@
+@import "../../styles/common.scss";
+
+.cafe-search-section {
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+}
+
+.cafe-search-bar {
+    border: 1px solid $light-grey;
+    border-radius: 5px;
+    width: 900px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-right: 50px;
+
+    .faMagnifyingGlass {
+        color: $light-grey;
+        font-size: 17px;
+        margin-right: 10px;
+    }
+
+    input {
+        outline:none;
+        border: none;
+        // border-bottom: 2px solid rgb(112, 112, 112);
+        height: 30px;
+
+        &::placeholder {
+            color: $grey;
+        }
+    }
+}
+
+.cafe-search-btn {
+    border: 1px solid balck;
+    border-radius: 5px;
+    width: 151px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+
+    h1 {
+        text-align: center;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
