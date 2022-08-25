@@ -6,7 +6,13 @@ function Cafe({cafe}) {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    return <div className="cafe-layout">
+    const openCafeInfoPage = async (cafeId) => {
+        window.location.href = "/cafe-info";
+            
+    }
+
+
+    return <div className="cafe-layout" onClick={()=>openCafeInfoPage(cafe.id)}>
         <h1 className="cafe-name">{cafe.id}. {cafe.cafeName}</h1>
         <div className="cafe-info-section">
             <div className="cafe-image">사진</div>
