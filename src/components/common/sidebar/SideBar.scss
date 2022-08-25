@@ -1,0 +1,57 @@
+@import "../../../styles/common.scss";
+
+.side-bar {
+    background-color: rgb(255, 255, 255);
+    width: $sidebar-width;
+    margin: 0;
+    position: fixed;
+    height: 100%;
+    box-shadow: 4px 0px 15px 1px #00000020 ; /*x-position y-position blur spread color*/
+
+    hr {
+        border: 1px solid $light-grey;
+        margin-bottom: 50px;
+    }
+}
+
+.welcome-message {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    .watson-logo {
+        width: 30px;
+        height: 58px;
+    }
+    h1 {
+        font-weight: bold;
+        padding-left: 12px;
+    }
+}
+
+.menu {
+    display: inline;
+    padding-left: 30px;
+    width: 100%;
+    height: 100%;
+    .menu-item {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 30px;
+    }
+    .active {
+        h2 {
+            color: black;
+        }
+    }
+}
+
+.log-out {
+    position: fixed;
+    bottom: 10px;
+    left: 14px;
+    color: #7D7D7D;
+    font-size: 10pt;
+    text-decoration: underline $grey;
+}

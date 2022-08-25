@@ -1,28 +1,23 @@
 
 import React from "react";
 import SideBar from "./components/common/sidebar/SideBar";
-import { BrowserRouter, Routes, Route, Switch} from "react-router-dom";
-// import { Route, Switch } from 'react-router';
-import Cafe from "./pages/cafe/Cafe";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import CafePage from "./pages/cafe/CafePage";
+import CafeInfoPage from "./pages/cafe/CafeInfoPage"
 import "./App.css";
 
 function App() {
 
   return (
-    <div>
+    <BrowserRouter>
       <SideBar />
-      <Cafe />
-    </div>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Cafe />} />
-    //     {/* <Route path="users/*" element={<Users />} /> */}
-    //   </Routes>
-    //   <Route path="/" exact={true} component={Cafe} />
-      
-    // </BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<CafePage />} />
+        <Route path="/cafe" element={<CafePage />} />
+        <Route path="/cafe-info" element={<CafeInfoPage />} />
+      </Routes>
+    </BrowserRouter>
   );
-
 
 }
 
