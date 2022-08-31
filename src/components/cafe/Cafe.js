@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { NavLink, Route } from 'react-router-dom';
 import "./Cafe.scss"
 function Cafe({cafe}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    const openCafeInfoPage = async (cafeId) => {
-        window.location.href = "/cafe-info";
-            
-    }
-
-
-    return <div className="cafe-layout" onClick={()=>openCafeInfoPage(cafe.id)}>
+    return <div className="cafe-layout">
+        <NavLink to={`/cafes/info?cid=${cafe.id}`}>
         <h1 className="cafe-name">{cafe.id}. {cafe.cafeName}</h1>
         <div className="cafe-info-section">
-            <div className="cafe-image">사진</div>
+            <img className="cafe-image" src={cafe.imageUrl} alt={cafe.cafeName} />
             <div className="cafe-info">
                 <div className="cafe-info__title">
                     <h2>전화번호</h2>
@@ -36,7 +32,7 @@ function Cafe({cafe}) {
                 
             </div>
         </div>
-        {/* {id}, {cafeName}, {cafePhoneNum}, {isEnglishPossible}, {website}, {address}, {rating}, {reviewCount}, {companyId}, {locationId} */}
+        </NavLink>
     </div>
 }
 

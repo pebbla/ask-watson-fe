@@ -5,17 +5,17 @@ import "./SideBar.scss"
 
 function SideBar() {
     const menus = [
-        { name: "방탈출 카페", path: "/cafe" },
-        { name: "방탈출 테마", path: "/theme" },
-        { name: "공지", path: "/notice" },
-        { name: "FAQ", path: "/faq" },
-        { name: "회원 관리", path: "/user-management" },
-        { name: "신고 처리", path: "/report-process" },
+        { name: "방탈출 카페", path: "/cafes" },
+        { name: "방탈출 테마", path: "/themes" },
+        { name: "공지", path: "/notices" },
+        { name: "FAQ", path: "/faqs" },
+        { name: "회원 관리", path: "/user-managements" },
+        { name: "신고 처리", path: "/report-processes" },
     ]
 
     return (
         <div className="side-bar">
-            <Link to="/cafe">
+            <Link to="/cafes">
                 <div className="welcome-message">
                     <img src={watson_logo} className="watson-logo" alt="watson-logo" />
                     <h1>ASK WATSON</h1>

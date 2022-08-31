@@ -1,0 +1,120 @@
+@import "../../styles/common.scss";
+
+.cafe-info-layout {
+    width: 555px;
+    height: 100%;
+    position: relative;
+    border-right: 1px solid $light-grey;
+    
+    .image-section {
+        margin-bottom: 40px;
+
+        img {
+        width: 555px;
+        height: 330px;
+        object-fit: cover;
+        }   
+
+        .faArrowLeft {
+            position: absolute;
+            z-index: 1;
+            top: 5px;
+            left: 9px;
+            color: white;
+            font-size: 28px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:1400px){ 
+    .cafe-info-layout {
+        width: 380px;
+        
+        img {
+            width: 385px;
+            height: 225px;
+            object-fit: cover;
+        }
+    }
+}
+
+.cafe-title-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    h1 {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .faPencil {
+        color: $grey;
+        font-size: 18px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.cafe-info-section {
+    width: 340px;
+    // height: 300px;
+    line-height: 1.5;
+    display: flex;
+
+    .cafe-info__title {
+        width:80px;
+        height:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    
+        h2 {
+            font-weight: bold;
+        }
+    }
+
+    .cafe-info__content {
+        width:260px;
+        height:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    
+}
+
+.cafe-website-btn {
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h6 {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.mg_left {
+    margin-left: 30px;
+}
+
+.mg_right {
+    margin-right: 20px;
+}
