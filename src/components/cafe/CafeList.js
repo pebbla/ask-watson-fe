@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import GridLayout from "react-grid-layout";
 import axios from "axios";
 import Cafe from "./Cafe";
 import "./CafeList.scss"
@@ -9,16 +8,16 @@ function CafeList() {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    const [cafeListData, setCafeListData] = useState([])
+    const [cafeList, setCafeList] = useState([])
 
     useEffect(() => {getCafeList()}, [])
 
     async function getCafeList() {
         await axios
-            .get("http://localhost:8080/v1/cafes", config)
+            .get("http://localhost:8080/v1/admin/cafes", config)
             .then(response => {
-                setCafeListData(response.data['content']);
-                console.log(response.data['content']);
+                setCafeList(response.data['data']);
+                console.log(response.data['data']);
             })
             .catch((error) => {
                 console.error("ERROR: " + error);
@@ -27,7 +26,7 @@ function CafeList() {
 
     return <div className="cafe-list-layout">
         {/* <GridLayout cols={12} rowHeight={30} width={1200}> */}
-        {cafeListData.map((cafe) => {
+        {cafeList.map((cafe) => {
             return <Cafe 
                 key = {cafe.id}
                 cafe = {cafe}

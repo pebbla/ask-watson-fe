@@ -13,8 +13,8 @@ function App() {
       <SideBar />
       <Routes>
         <Route exact path="/" element={<CafePage />} />
-        <Route path="/cafe" element={<CafePage />} />
-        <Route path="/cafe-info" element={<CafeInfoPage />} />
+        <Route path="/cafes" element={<CafePage />} />
+        <Route path="/cafes/info" element={<CafeInfoPage />} />
       </Routes>
     </BrowserRouter>
   );
