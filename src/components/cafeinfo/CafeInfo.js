@@ -143,10 +143,50 @@ function CafeInfo({cafeId}) {
     //     console.log("투두가 수정되었습니다.");
     // }
 
+    async function deleteCafe() {
+        await axios
+            .delete("http://localhost:8080/v1//admin/cafes/" + cafeId, config)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {console.error(error);});
+    }
+
     async function onClickEditingDone() {
         setEditingCafe(false);
         
     }
+
+    const useConfirm = (message = null, onConfirm, onCancel) => {
+        if (!onConfirm || typeof onConfirm !== "function") {
+          return;
+        }
+        if (onCancel && typeof onCancel !== "function") {
+          return;
+        }
+      
+        const confirmAction = () => {
+          if (window.confirm(message)) {
+            onConfirm()
+            navigate(-1)
+          } else {
+            onCancel()
+          }
+        };
+      
+        return confirmAction;
+    };
+
+    async function deleteConfirm() {
+        deleteCafe()
+    }
+    const cancelConfirm = () => console.log("취소했습니다.")
+
+    const confirmDelete = useConfirm(
+        "카페를 삭제하시겠습니까?",
+        deleteConfirm,
+        cancelConfirm
+    );
 
     const handleChangeOnLocationSelectBox = (e) => {
         setLocationId(e.target.value)
@@ -257,10 +297,13 @@ function CafeInfo({cafeId}) {
                 <h2>{cafe.address}</h2>
             </div>
         </div>}
-        
-        <div className="cafe-website-btn" onClick={() => window.open(cafe.website, '_blank')}>
-            <h6>웹사이트로 이동</h6>
+        {isEditingCafe
+        ? <div className="cafe-delete-btn" onClick={() => confirmDelete()}>
+            <h6>카페 삭제하기</h6>
         </div>
+        : <div className="cafe-website-btn" onClick={() => window.open(cafe.website, '_blank')}>
+            <h6>웹사이트로 이동</h6>
+        </div>}
     </div>
     : <div></div>
 }
