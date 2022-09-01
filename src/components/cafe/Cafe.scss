@@ -35,14 +35,11 @@
             width: 340px;
             height: 125px;
             display: flex;
-            
+            line-height: 1.2;
 
             .cafe-info__title {
                 width:80px;
                 height:100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
             
                 h2 {
                     font-weight: bold;
@@ -52,9 +49,6 @@
             .cafe-info__content {
                 width:260px;
                 height:100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
             }
             
         }

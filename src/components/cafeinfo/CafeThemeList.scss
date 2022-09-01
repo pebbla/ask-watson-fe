@@ -1,33 +1,55 @@
 @import "../../styles/common.scss";
 
 .cafe-info__themes {
-    // width: 100%;
     height: 100%;
+    flex: 1;
+    overflow-y: scroll;
+    position: relative;
 }
 
-.themes-title-section {
+.themes-info-title-section {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    flex-grow: 1;
+    justify-content: space-between;
+    padding-top:10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    flex:1;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid $light-grey;
 
     h1 {
-        font-size: 24px;
+        font-size: 28px;
+        font-weight: bold;
     }
 
     .add-theme-btn {
-        width: 200px;
+        width: 150px;
         height: 51px;
         background-color: black;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 5px;
+        position: fixed;
+        right: 10px;
 
         h2 {
             font-size: 16px;
             font-weight: bold;
             color: white;
         }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
+}
+
+.themes-info-list-section {
+    overflow-y: scroll;
+    margin-top: 65px;
 }

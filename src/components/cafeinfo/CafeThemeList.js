@@ -25,14 +25,13 @@ function CafeThemeList({cafeId}) {
     }
 
     return <div className="cafe-info__themes">
-        <div className="themes-title-section">
+        <div className="themes-info-title-section">
             <h1>테마정보</h1>
             <div className="add-theme-btn">
                 <h2>테마 추가하기</h2>
             </div>
         </div>
-        <hr />
-        <div className="themes-layout">
+        <div className="themes-info-list-section">
             {themeList.map((theme) => {
                 return <CafeTheme 
                     key = {theme.id}
