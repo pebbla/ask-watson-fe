@@ -29,123 +29,90 @@ function LocationSelectBox({locations, defaultValue, handleChange}) {
 	)
 }
 
-function CompanySelectBox({companies, defaultValue, handleChange}) {
-    
-    return (
-		<select onChange={handleChange}>
-			{companies.map((company) => (
-				<option
-					key={company.id}
-					value={company.id}
-					defaultValue={defaultValue === company.value}
-				>
-					{company.companyName}
-				</option>
-			))}
-		</select>
-	)
-}
-
-function CafeInfo({cafeId}) {
+function CafeInfo({cafe}) {
     let navigate = useNavigate();
     
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    const [cafe, setCafe] = useState(null)
+    // const [cafe, setCafe] = useState(null)
     const [isEditingCafe, setEditingCafe] = useState(false)
     const [locationMenus, setLocationMenus] = useState([])
-    const [companyMenus, setCompanyMenus] = useState([])
 
-    const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState("")
-    const [locationId, setLocationId] = useState(-1)
-    const [companyId, setCompanyId] = useState(-1)
-    const [englishPossibleYn, setEnglishPossibleYn] = useState(false)
-    const [cafeAddressTxt, setCafeAddressTxt] = useState("")
+    const [cafeNameTxt, setCafeNameTxt] = useState(cafe.cafeName)
+    const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafe.cafePhoneNum)
+    const [locationId, setLocationId] = useState(cafe.location.id)
+    const [englishPossibleYn, setEnglishPossibleYn] = useState(cafe.englishPossible)
+    const [cafeAddressTxt, setCafeAddressTxt] = useState(cafe.address)
+    const [cafeWebsiteTxt, setCafeWebsiteTxt] = useState(cafe.website)
+    const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
+    const [cafeLatitude, setCafeLatitude] = useState(cafe.geography.latitude)
     
     useEffect(() => {init()}, [])
 
     async function init() {
-        getCafeInfo()
+        // getCafeInfo()
         getLocations()
-        getCompanies()
     }
 
     async function getLocations() {
         await axios
         .get("http://localhost:8080/v1/locations", config)
         .then(response => {
-            setLocationMenus(response.data['dataList']);
+            setLocationMenus(response.data['data']);
         })
         .catch((error) => {
             console.error("ERROR: " + error);
         })
     }
 
-    async function getCompanies() {
-        await axios
-        .get("http://localhost:8080/v1/companies", config)
-        .then(response => {
-            setCompanyMenus(response.data['dataList']);
-        })
-        .catch((error) => {
-            console.error("ERROR: " + error);
-        })
-    }
-
-
-    async function getCafeInfo() {
-        await axios
-            .get("http://localhost:8080/v1/cafes/"+cafeId, config)
-            .then(response => {
-                setCafe(response.data['data']);
-                setCafePhoneNumTxt(cafe.cafePhoneNum)
-                setLocationId(cafe.location.id)
-                setCompanyId(cafe.company.id)
-                setEnglishPossibleYn(cafe.isEnglishPossible)
-                setCafeAddressTxt(cafe.address)
-            })
-            .catch((error) => {
-                console.error("ERROR: " + error);
-            })
-    }
-
-    // async function modifyCafeInfo() {
+    // async function getCafeInfo() {
     //     await axios
-    //         .put("http://localhost:8080/v1/admin/cafes/" + cafeId,
-    //         {
-    //             // cafeName: cafeName,
-
-    //             cafePhoneNum: cafePhoneNumTxt,
-            
-    //             private String website;
-            
-    //             private String address;
-            
-    //             private String imageUrl;
-            
-    //             private Long locationId;
-            
-    //             private Long companyId;
-            
-    //             private Double longitude;
-            
-    //             private Double latitude;
-            
-    //             private Boolean isEnglishPossible;
-    //         }, config)
-    //         .then((response) => {
-    //             console.log(response.data['data']);
+    //         .get("http://localhost:8080/v1/cafes/"+cafeId, config)
+    //         .then(response => {
+    //             setCafe(response.data['data']);
+    //             setCafeNameTxt(cafe.cafeName)
+    //             setCafePhoneNumTxt(cafe.cafePhoneNum)
+    //             setLocationId(cafe.location.id)
+    //             setCompanyId(cafe.company.id)
+    //             setEnglishPossibleYn(cafe.isEnglishPossible)
+    //             setCafeAddressTxt(cafe.address)
+    //             setCafeLongitude(cafe.geography.longitude)
+    //             setCafeLatitude(cafe.geography.latitude)
+    //             setCafeWebsiteTxt(cafe.website)
     //         })
-    //         .catch((error) => {console.error(error);});
-    //     // e.target.blur();
-    //     console.log("투두가 수정되었습니다.");
+    //         .catch((error) => {
+    //             console.error("ERROR: " + error);
+    //         })
     // }
+
+    async function modifyCafeInfo() {
+        window.location.reload();
+        await axios
+            .put("http://localhost:8080/v1/admin/cafes/" + cafe.id,
+            {
+                cafeName: cafeNameTxt,
+                cafePhoneNum: cafePhoneNumTxt,
+                website: cafeWebsiteTxt,
+                address: cafeAddressTxt,
+                imageUrl: cafe.imageUrl,
+                locationId: locationId,
+                companyId: cafe.company.id,
+                longitude: cafeLongitude,
+                latitude: cafeLatitude,
+                isEnglishPossible: englishPossibleYn
+            }, config)
+            .then((response) => {
+                console.log(response.data['data']);
+            })
+            .catch((error) => {console.error(error);});
+            
+    }
 
     async function deleteCafe() {
         await axios
-            .delete("http://localhost:8080/v1//admin/cafes/" + cafeId, config)
+            .delete("http://localhost:8080/v1/admin/cafes/" + cafe.id, config)
             .then((response) => {
                 console.log(response.data)
             })
@@ -153,8 +120,8 @@ function CafeInfo({cafeId}) {
     }
 
     async function onClickEditingDone() {
-        setEditingCafe(false);
-        
+        setEditingCafe(false)
+        modifyCafeInfo()
     }
 
     const useConfirm = (message = null, onConfirm, onCancel) => {
@@ -192,12 +159,13 @@ function CafeInfo({cafeId}) {
         setLocationId(e.target.value)
     }
 
-    const handleChangeOnCompanySelectBox = (e) => {
-        setCompanyId(e.target.value)
-    }
-
     const handleChangeOnEngPosRadioBtn = (e) => {
         setEnglishPossibleYn(e.target.value === "가능")
+    }
+
+    function changeCafeNameTxt(e) {
+        e.preventDefault();
+        setCafeNameTxt(e.target.value)
     }
 
     function changeCafePhoneNumTxt(e) {
@@ -210,6 +178,21 @@ function CafeInfo({cafeId}) {
         setCafeAddressTxt(e.target.value);
     }
 
+    function changeCafeWebsite(e) {
+        e.preventDefault();
+        setCafeWebsiteTxt(e.target.value);
+    }
+
+    function changeCafeLongitude(e) {
+        e.preventDefault();
+        setCafeLongitude(e.target.value);
+    }
+
+    function changeCafeLatitude(e) {
+        e.preventDefault();
+        setCafeLatitude(e.target.value);
+    }
+
     return cafe != null 
     ? <div className="cafe-info-layout">
         <div className="image-section">
@@ -217,7 +200,13 @@ function CafeInfo({cafeId}) {
             <FontAwesomeIcon className="faArrowLeft" icon={faArrowLeft} onClick={() => navigate(-1)} />
         </div>
         <div className="cafe-title-section mg_left mg_right">
-            <h1>{cafe.cafeName}</h1>
+            {isEditingCafe
+            ? <input type="text" value={ cafeNameTxt } 
+                onChange={changeCafeNameTxt} 
+                onKeyPress={onEnterKeyPressBlur}
+                placeholder = {cafe.cafeName}
+                />
+            : <h1>{cafe.cafeName}</h1>}
             {isEditingCafe
             ? <h5 onClick={()=>onClickEditingDone()}>수정완료</h5>
             : <FontAwesomeIcon className="faPencil" icon={faPencil} onClick={() => setEditingCafe(true)} />}
@@ -227,10 +216,12 @@ function CafeInfo({cafeId}) {
             <div className="cafe-info__title">
                 <h2>전화번호</h2>
                 <h2>지역</h2>
-                <h2>체인명</h2>
                 <h2>별점</h2>
                 <h2>영어가능</h2>
                 <h2>주소</h2>
+                <h2>위도 X</h2>
+                <h2>경도 Y</h2>
+                <h2>웹사이트</h2>
             </div>
             <div className="cafe-info__content">
                 {cafePhoneNumTxt !== null
@@ -238,18 +229,12 @@ function CafeInfo({cafeId}) {
                         <input type="text" value={ cafePhoneNumTxt } 
                             onChange={changeCafePhoneNumTxt} 
                             onKeyPress={onEnterKeyPressBlur}
-                            placeholder = {cafe.cafePhoneNum}
                             />
                     </div>
                     : <div></div>}
                 {locationMenus !== []
                     ? <div className="editing-cafe__input">
                         <LocationSelectBox locations = {locationMenus} defaultValue = {cafe.location.id} handleChange = {handleChangeOnLocationSelectBox}/>
-                    </div>
-                    : <div></div>}
-                {locationMenus !== []
-                    ? <div className="editing-cafe__input">
-                        <CompanySelectBox companies = {companyMenus} defaultValue = {cafe.company.id} handleChange = {handleChangeOnCompanySelectBox}/>
                     </div>
                     : <div></div>}
                 <h2>{cafe.rating}</h2>
@@ -274,8 +259,25 @@ function CafeInfo({cafeId}) {
                     <textarea value = {cafeAddressTxt} 
                         onChange={changeCafeAddressTxt} 
                         onKeyPress={onEnterKeyPressBlur}
-                        placeholder = {cafe.address}
                         />
+                </div>
+                <div className="editing-cafe__input">
+                    <input type="text" value={ cafeLongitude } 
+                            onChange={changeCafeLongitude} 
+                            onKeyPress={onEnterKeyPressBlur}
+                            />
+                </div>
+                <div className="editing-cafe__input">
+                    <input type="text" value={ cafeLatitude } 
+                            onChange={changeCafeLatitude} 
+                            onKeyPress={onEnterKeyPressBlur}
+                            />
+                </div>
+                <div className="editing-cafe__input">
+                    <input type="text" value={ cafeWebsiteTxt } 
+                            onChange={changeCafeWebsite} 
+                            onKeyPress={onEnterKeyPressBlur}
+                            />
                 </div>
             </div>
         </div>
@@ -283,7 +285,6 @@ function CafeInfo({cafeId}) {
             <div className="cafe-info__title">
                 <h2>전화번호</h2>
                 <h2>지역</h2>
-                <h2>체인명</h2>
                 <h2>별점</h2>
                 <h2>영어가능</h2>
                 <h2>주소</h2>
@@ -291,7 +292,6 @@ function CafeInfo({cafeId}) {
             <div className="cafe-info__content">
                 <h2>{cafe.cafePhoneNum}</h2>
                 <h2>{cafe.location.state} | {cafe.location.city}</h2>
-                <h2>{cafe.company.companyName}</h2>
                 <h2>{cafe.rating}</h2>
                 {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
                 <h2>{cafe.address}</h2>

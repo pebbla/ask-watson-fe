@@ -7,7 +7,7 @@ var config = {
 const getCafes = async () => {
     await axios.get("/admin/cafes", config)
         .then((response) => {
-            return response.data['dataList'];
+            return response.data['data'];
         })
         .catch((error) => {
             console.error("ERROR: " + error);

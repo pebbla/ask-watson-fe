@@ -16,8 +16,8 @@ function CafeThemeList({cafeId}) {
         await axios
             .get("http://localhost:8080/v1/cafes/" + cafeId + "/themes" , config)
             .then(response => {
-                setThemeList(response.data['dataList']);
-                console.log(response.data['dataList']);
+                setThemeList(response.data['data']);
+                console.log(response.data['data']);
             })
             .catch((error) => {
                 console.error("ERROR: " + error);
