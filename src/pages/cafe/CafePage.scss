@@ -30,8 +30,8 @@
     input {
         outline:none;
         border: none;
-        // border-bottom: 2px solid rgb(112, 112, 112);
         height: 30px;
+        width: 100%;
 
         &::placeholder {
             color: $grey;

@@ -24,10 +24,19 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 
-    h1 {
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 20px;
+    .theme-name {
+        display: block;
+        margin-bottom: 30px;
+        input {
+            width: 100%;
+            font-size: 30px;
+            font-weight: bold;
+            padding-top: 0;
+            padding-bottom: 10px;
+            outline:none;
+            border:none;
+            border-bottom: 1px solid;
+        }
     }
 
     .faX {
@@ -60,7 +69,7 @@
 .image-and-unchangable-info {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 
     .theme-image {
         border-radius: 5px;
@@ -93,7 +102,7 @@
     display: flex;
     line-height: 3.125;
     font-size: 16px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     
     .theme-info__title {
         font-weight: bold;
@@ -139,8 +148,6 @@
         &:hover {
             cursor: pointer;
         }
-
-        
     }
 
     .delete-theme-btn {

@@ -65,6 +65,70 @@ function ThemePopup({theme, onClose, isOpen}) {
         })
     }
 
+    async function modifyThemeInfo() {
+        window.location.reload();
+        await axios
+            .put("http://localhost:8080/v1/admin/themes/" + theme.id,
+            {
+                themeName: themeNameTxt,
+                themeExplanation: themeExplanationTxt,
+                categoryId: themeCategoryId,
+                timeLimit: themeTimeLimit,
+                minNumPeople: themeMinNumPeople,
+                price: themePrice,
+                reservationUrl: themeReservationUrlTxt,
+                imageUrl: theme.imageUrl,
+                difficulty: theme.difficulty
+            }, config)
+            .then((response) => {
+                console.log(response.data['data']);
+                
+            })
+            .catch((error) => {console.error(error);});
+            
+    }
+
+    const useConfirm = (message = null, onConfirm, onCancel) => {
+        if (!onConfirm || typeof onConfirm !== "function") {
+          return;
+        }
+        if (onCancel && typeof onCancel !== "function") {
+          return;
+        }
+      
+        const confirmAction = () => {
+          if (window.confirm(message)) {
+            onConfirm()
+          } else {
+            onCancel()
+          }
+        };
+      
+        return confirmAction;
+    };
+
+    async function deleteConfirm() {
+        window.location.reload();
+        deleteTheme()
+    }
+
+    const cancelConfirm = () => console.log("취소했습니다.")
+
+    const confirmDelete = useConfirm(
+        "테마를 삭제하시겠습니까?",
+        deleteConfirm,
+        cancelConfirm
+    );
+
+    async function deleteTheme() {
+        await axios
+            .delete("http://localhost:8080/v1/admin/themes/" + theme.id, config)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {console.error(error);});
+    }
+
     function changeTxt(e, txtSetter) {
         e.preventDefault();
         txtSetter(e.target.value);
@@ -74,7 +138,9 @@ function ThemePopup({theme, onClose, isOpen}) {
         <div className='bg' onClick={onClose}>
             <div className='theme-popup-layout' onClick={(e) => e.stopPropagation()}>
                 <FontAwesomeIcon className="faX" icon={faX} onClick={onClose}/>
-                <h1>{theme.themeName}</h1>
+                <div className="theme-name"><input type="text" value={ themeNameTxt } 
+                    onChange={(e) => changeTxt(e, setThemeNameTxt)} 
+                    onKeyPress={onEnterKeyPressBlur}/></div>
                 <div className='image-and-unchangable-info'>
                     <img className="theme-image" src={theme.imageUrl} alt={theme.themeName} />
                     <div className='unchangable-info'>
@@ -137,10 +203,10 @@ function ThemePopup({theme, onClose, isOpen}) {
                     </div>
                 </div>
                 <div className="theme-popup-buttons">
-                    <div className="btn delete-theme-btn">
+                    <div className="btn delete-theme-btn" onClick={() => confirmDelete()}>
                         <h2>테마 삭제하기</h2>
                     </div>
-                    <div className="btn modify-theme-btn">
+                    <div className="btn modify-theme-btn" onClick={() => modifyThemeInfo()}>
                         <h2>테마 수정하기</h2>
                     </div>
                 </div>
