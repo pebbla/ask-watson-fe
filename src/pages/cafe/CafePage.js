@@ -4,10 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CafeList from "../../components/cafe/CafeList";
 import "./CafePage.scss"
+import NewCafePopup from "../../components/cafe/NewCafePopup";
 
 function CafePage() {
     const [searchWord, setSearchWord] = useState("")
     const [searchTxt, setSearchTxt] = useState("");
+    const [isModalOpen, setModalOpen] = useState(false)
+
+    const openPopup = () => {
+        setModalOpen(true)
+    }
+
+    const onClose = () => {
+        setModalOpen(false)
+    }
 
     function changeSearchTxt(e) {
         e.preventDefault();
@@ -36,7 +46,10 @@ function CafePage() {
                 <h1>검색</h1>
             </div>
         </div>
-        {/* <CafeList searchWord={searchWord}/> */}
+        <div className="add-cafe-btn" onClick={openPopup}>
+            <h2>+</h2>
+        </div>
+        <NewCafePopup onClose={onClose} isOpen={isModalOpen}/>
         <CafeList key = {searchWord} searchWord={searchWord}/>
     </div>;
 }

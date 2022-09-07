@@ -29,6 +29,12 @@
             background-color: lightgrey;
             font-size: 12px;
             margin-right: 20px;
+
+            img {
+                border-radius: 5px;
+                width: 125px;
+                height: 125px;
+            }
         }
 
         .cafe-info {

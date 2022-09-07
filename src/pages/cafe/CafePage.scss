@@ -3,6 +3,30 @@
 .cafe-page-layout {
     margin-left: $sidebar-width;
     padding: 40px;
+
+    .add-cafe-btn {
+        background-color: black;
+        position: fixed;
+        bottom: 80px;
+        right: 75px;
+        width: 55px;
+        height: 55px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 3px 3px 3px 1px #00000050 ; /*x-position y-position blur spread color*/
+    
+        h2 {
+            padding-top: 3px;
+            color: white;
+            font-size: 35px;
+        }
+    
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .cafe-search-section {

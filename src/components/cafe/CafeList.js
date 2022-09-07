@@ -16,13 +16,17 @@ function CafeList({searchWord}) {
         await axios
             .get("http://localhost:8080/v1/admin/cafes?searchWord="+searchWord, config)
             .then(response => {
-                setCafeList(response.data['data']);
-                console.log(response.data['data']);
+                var data = response.data['data']
+                data.sort((a, b) => a.id - b.id);
+                setCafeList(data);
+                console.log(data);
             })
             .catch((error) => {
                 console.error("ERROR: " + error);
             })
     };
+
+    
 
     return <div className="cafe-list-layout">
         {cafeList.map((cafe) => {

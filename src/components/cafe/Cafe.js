@@ -11,7 +11,7 @@ function Cafe({cafe}) {
         <NavLink to={`/cafes/info?cid=${cafe.id}`}>
         <h1 className="cafe-name">{cafe.id}. {cafe.cafeName}</h1>
         <div className="cafe-info-section">
-            <img className="cafe-image" src={cafe.imageUrl} alt={cafe.cafeName} />
+            <div className="cafe-image"><img src={cafe.imageUrl} alt={cafe.cafeName} /></div>
             <div className="cafe-info">
                 <div className="cafe-info__title">
                     <h2>전화번호</h2>
