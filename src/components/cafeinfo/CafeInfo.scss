@@ -24,7 +24,6 @@
 
         .faArrowLeft {
             position: absolute;
-            z-index: 1;
             top: 5px;
             left: 9px;
             color: white;
@@ -114,13 +113,6 @@
     }
     
     &.editing-cafe {
-        
-
-        // .editing-cafe__input {
-        //     margin-top: 5px;
-        //     margin-bottom: 5px;
-        // }
-
         .cafe-info__title {
             line-height: 2.6;
 

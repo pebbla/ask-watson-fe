@@ -36,7 +36,6 @@ function CafeInfo({cafe}) {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    // const [cafe, setCafe] = useState(null)
     const [isEditingCafe, setEditingCafe] = useState(false)
     const [locationMenus, setLocationMenus] = useState([])
 
@@ -48,11 +47,10 @@ function CafeInfo({cafe}) {
     const [cafeWebsiteTxt, setCafeWebsiteTxt] = useState(cafe.website)
     const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
     const [cafeLatitude, setCafeLatitude] = useState(cafe.geography.latitude)
-    
-    useEffect(() => {init()}, [])
 
+    useEffect(() => {init()}, [])
+    
     async function init() {
-        // getCafeInfo()
         getLocations()
     }
 
@@ -66,26 +64,6 @@ function CafeInfo({cafe}) {
             console.error("ERROR: " + error);
         })
     }
-
-    // async function getCafeInfo() {
-    //     await axios
-    //         .get("http://localhost:8080/v1/cafes/"+cafeId, config)
-    //         .then(response => {
-    //             setCafe(response.data['data']);
-    //             setCafeNameTxt(cafe.cafeName)
-    //             setCafePhoneNumTxt(cafe.cafePhoneNum)
-    //             setLocationId(cafe.location.id)
-    //             setCompanyId(cafe.company.id)
-    //             setEnglishPossibleYn(cafe.isEnglishPossible)
-    //             setCafeAddressTxt(cafe.address)
-    //             setCafeLongitude(cafe.geography.longitude)
-    //             setCafeLatitude(cafe.geography.latitude)
-    //             setCafeWebsiteTxt(cafe.website)
-    //         })
-    //         .catch((error) => {
-    //             console.error("ERROR: " + error);
-    //         })
-    // }
 
     async function modifyCafeInfo() {
         window.location.reload();

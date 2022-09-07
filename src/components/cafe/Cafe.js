@@ -29,24 +29,10 @@ function Cafe({cafe}) {
                     <h2>{cafe.reviewCount}</h2>
                     {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
                 </div>
-                
             </div>
         </div>
         </NavLink>
     </div>
 }
-
-// Cafe.propTypes = {
-//     id: PropTypes.number.isRequired,
-//     cafeName: PropTypes.string,
-//     cafePhoneNum: PropTypes.string,
-//     isEnglishPossible: PropTypes.bool,
-//     website: PropTypes.string,
-//     address: PropTypes.string,
-//     rating: PropTypes.number,
-//     reviewCount: PropTypes.number,
-//     companyId: PropTypes.number,
-//     locationId: PropTypes.number
-// };
 
 export default Cafe;
