@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import "./CafeTheme.scss"
 import ThemePopup from "../../theme/ThemePopup";
+import "./CafeTheme.scss"
 
 function CafeTheme({theme}) {
     const [isModalOpen, setModalOpen] = useState(false)
@@ -19,9 +19,6 @@ function CafeTheme({theme}) {
         <div className="theme-title-section">
             <h1>{theme.themeName}</h1>
             <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} onClick={openPopup}/>
-            {/* {
-                isModalOpen && <ThemePopup theme = {theme} onClose = {onClose} />
-            } */}
             <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
         </div>
         <div className="theme-info-section">

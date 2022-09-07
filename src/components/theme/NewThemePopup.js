@@ -3,7 +3,7 @@ import axios from "axios"
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import "./ThemePopup.scss"
+import "./NewThemePopup.scss"
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -12,15 +12,15 @@ function onEnterKeyPressBlur(e) {
     }
 }
 
-function CategorySelectBox({categories, defaultValue, handleChange}) {
+function CategorySelectBox({categories, handleChange}) {
     
     return (
-		<select onChange={handleChange}>
+		<select onChange={handleChange} defaultValue={'선택'}>
+            <option value="선택" disabled hidden>선택</option>
 			{categories.map((category) => (
 				<option
 					key={category.id}
 					value={category.id}
-					defaultValue={defaultValue === category.value}
 				>
 					{category.categoryName}
 				</option>
@@ -29,20 +29,21 @@ function CategorySelectBox({categories, defaultValue, handleChange}) {
 	)
 }
 
-function ThemePopup({theme, onClose, isOpen}) {
+function NewThemePopup({cafeId, onClose, isOpen}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
     
     const [categoryItems, setCategoryItems] = useState([])
 
-    const [themeNameTxt, setThemeNameTxt] = useState(theme.themeName)
-    const [themeCategoryId, setThemeCategoryId] = useState(theme.category.id)
-    const [themeExplanationTxt, setThemeExplanationTxt] = useState(theme.themeExplanation)
-    const [themeTimeLimit, setThemeTimeLimit] = useState(theme.timeLimit)
-    const [themeMinNumPeople, setThemeMinNumPeople] = useState(theme.minNumPeople)
-    const [themePrice, setThemePrice] = useState(theme.price)
-    const [themeReservationUrlTxt, setThemeReservationUrlTxt] = useState(theme.reservationUrl)
+    const [themeNameTxt, setThemeNameTxt] = useState("")
+    const [themeCategoryId, setThemeCategoryId] = useState()
+    const [themeExplanationTxt, setThemeExplanationTxt] = useState("")
+    const [themeTimeLimit, setThemeTimeLimit] = useState()
+    const [themeMinNumPeople, setThemeMinNumPeople] = useState(2)
+    const [themePrice, setThemePrice] = useState()
+    const [themeReservationUrlTxt, setThemeReservationUrlTxt] = useState("")
+    const [themeImageUrl, setThemeImageUrl] = useState("")
 
     const handleChangeOnLocationSelectBox = (e) => {
         setThemeCategoryId(e.target.value)
@@ -65,13 +66,13 @@ function ThemePopup({theme, onClose, isOpen}) {
         })
     }
 
-    async function modifyThemeInfo() {
+    async function addTheme() {
         if(themeNameTxt === "") window.alert("테마 제목을 입력해주세요.")
         else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
         else if(themePrice == null) window.alert("가격을 입력해주세요.")
         else await axios
-            .put("http://localhost:8080/v1/admin/themes/" + theme.id,
+            .post("http://localhost:8080/v1/admin/cafes/"+cafeId+"/themes",
             {
                 themeName: themeNameTxt,
                 themeExplanation: themeExplanationTxt,
@@ -80,54 +81,12 @@ function ThemePopup({theme, onClose, isOpen}) {
                 minNumPeople: themeMinNumPeople,
                 price: themePrice,
                 reservationUrl: themeReservationUrlTxt,
-                imageUrl: theme.imageUrl,
-                difficulty: theme.difficulty
+                imageUrl: themeImageUrl,
+                difficulty: 0
             }, config)
             .then((response) => {
                 window.location.reload();
                 console.log(response.data['data']);
-                
-            })
-            .catch((error) => {console.error(error);});
-    }
-
-    const useConfirm = (message = null, onConfirm, onCancel) => {
-        if (!onConfirm || typeof onConfirm !== "function") {
-          return;
-        }
-        if (onCancel && typeof onCancel !== "function") {
-          return;
-        }
-      
-        const confirmAction = () => {
-          if (window.confirm(message)) {
-            onConfirm()
-          } else {
-            onCancel()
-          }
-        };
-      
-        return confirmAction;
-    };
-
-    async function deleteConfirm() {
-        window.location.reload();
-        deleteTheme()
-    }
-
-    const cancelConfirm = () => console.log("취소했습니다.")
-
-    const confirmDelete = useConfirm(
-        "테마를 삭제하시겠습니까?",
-        deleteConfirm,
-        cancelConfirm
-    );
-
-    async function deleteTheme() {
-        await axios
-            .delete("http://localhost:8080/v1/admin/themes/" + theme.id, config)
-            .then((response) => {
-                console.log(response.data)
             })
             .catch((error) => {console.error(error);});
     }
@@ -145,37 +104,10 @@ function ThemePopup({theme, onClose, isOpen}) {
                     onChange={(e) => changeTxt(e, setThemeNameTxt)} 
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
-                <div className='image-and-unchangable-info'>
-                    <img className="theme-image" src={theme.imageUrl} alt={theme.themeName} />
-                    <div className='unchangable-info'>
-                        <div className="theme-info__part">
-                            <div className="theme-info__title">
-                                <h2>난이도</h2>
-                                <h2>좋아요수</h2>
-                                <h2>탈출수</h2>
-                                <h2>리뷰수</h2>
-                            </div>
-                            <div className="theme-info__content">
-                                <h2>💪 {theme.difficulty}</h2>
-                                <h2>❤️ {theme.heartCount}</h2>
-                                <h2>🏃 {theme.escapeCount}</h2>
-                                <h2>🗒 {theme.reviewCount}</h2>
-                            </div>
-                        </div>
-                        <div className="divider__ver"></div>
-                        <div className="theme-info__part">
-                            <div className="theme-info__title">
-                                <h2>별점</h2>
-                                <h2>장치비율</h2>
-                                <h2>활동성</h2>
-                            </div>
-                            <div className="theme-info__content">
-                                <h2>⭐️ {theme.rating}</h2>
-                                <h2>🎲 {theme.deviceRatio}</h2>
-                                <h2>🏄 {theme.activity}</h2>
-                            </div>
-                        </div>
-                    </div>
+                <div className="image-bg">
+                    {themeImageUrl === ""
+                    ? <h6>사진 추가하기</h6>
+                    : <img className="theme-image" src={""} alt={themeNameTxt} />}
                 </div>
                 <div className="theme-changable-info">
                     <div className="theme-info__title">
@@ -187,7 +119,7 @@ function ThemePopup({theme, onClose, isOpen}) {
                         <h2>테마설명</h2>
                     </div>
                     <div className="theme-info__inputs">
-                        <div className="editing-theme__input"><CategorySelectBox  categories = {categoryItems} defaultValue = {theme.category.id} handleChange = {handleChangeOnLocationSelectBox}/></div>
+                        <div className="editing-theme__input"><CategorySelectBox  categories = {categoryItems} handleChange = {handleChangeOnLocationSelectBox}/></div>
                         <div className="editing-theme__input"><input type="number" value={ themeTimeLimit } 
                                 onChange={(e) => changeTxt(e, setThemeTimeLimit)} 
                                 onKeyPress={onEnterKeyPressBlur}/> 분</div>
@@ -207,11 +139,8 @@ function ThemePopup({theme, onClose, isOpen}) {
                     </div>
                 </div>
                 <div className="theme-popup-buttons">
-                    <div className="btn delete-theme-btn" onClick={() => confirmDelete()}>
-                        <h2>테마 삭제하기</h2>
-                    </div>
-                    <div className="btn modify-theme-btn" onClick={() => modifyThemeInfo()}>
-                        <h2>테마 수정하기</h2>
+                    <div className="add-theme-btn" onClick={() => addTheme()}>
+                        <h2>테마 추가하기</h2>
                     </div>
                 </div>
             </div>
@@ -219,4 +148,4 @@ function ThemePopup({theme, onClose, isOpen}) {
     </Modal>
 }
 
-export default ThemePopup;
+export default NewThemePopup;
