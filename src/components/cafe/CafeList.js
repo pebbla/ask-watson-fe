@@ -3,7 +3,7 @@ import axios from "axios";
 import Cafe from "./Cafe";
 import "./CafeList.scss"
 
-function CafeList() {
+function CafeList({searchWord}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
@@ -14,25 +14,27 @@ function CafeList() {
 
     async function getCafeList() {
         await axios
-            .get("http://localhost:8080/v1/admin/cafes", config)
+            .get("http://localhost:8080/v1/admin/cafes?searchWord="+searchWord, config)
             .then(response => {
-                setCafeList(response.data['data']);
-                console.log(response.data['data']);
+                var data = response.data['data']
+                data.sort((a, b) => a.id - b.id);
+                setCafeList(data);
+                console.log(data);
             })
             .catch((error) => {
                 console.error("ERROR: " + error);
             })
     };
 
+    
+
     return <div className="cafe-list-layout">
-        {/* <GridLayout cols={12} rowHeight={30} width={1200}> */}
         {cafeList.map((cafe) => {
             return <Cafe 
                 key = {cafe.id}
                 cafe = {cafe}
             />
         })}
-        {/* </GridLayout> */}
     </div>
 }
 

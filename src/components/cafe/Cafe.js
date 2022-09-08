@@ -11,7 +11,7 @@ function Cafe({cafe}) {
         <NavLink to={`/cafes/info?cid=${cafe.id}`}>
         <h1 className="cafe-name">{cafe.id}. {cafe.cafeName}</h1>
         <div className="cafe-info-section">
-            <img className="cafe-image" src={cafe.imageUrl} alt={cafe.cafeName} />
+            <div className="cafe-image"><img src={cafe.imageUrl} alt={cafe.cafeName} /></div>
             <div className="cafe-info">
                 <div className="cafe-info__title">
                     <h2>전화번호</h2>
@@ -29,24 +29,10 @@ function Cafe({cafe}) {
                     <h2>{cafe.reviewCount}</h2>
                     {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
                 </div>
-                
             </div>
         </div>
         </NavLink>
     </div>
 }
-
-// Cafe.propTypes = {
-//     id: PropTypes.number.isRequired,
-//     cafeName: PropTypes.string,
-//     cafePhoneNum: PropTypes.string,
-//     isEnglishPossible: PropTypes.bool,
-//     website: PropTypes.string,
-//     address: PropTypes.string,
-//     rating: PropTypes.number,
-//     reviewCount: PropTypes.number,
-//     companyId: PropTypes.number,
-//     locationId: PropTypes.number
-// };
 
 export default Cafe;

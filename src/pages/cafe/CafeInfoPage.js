@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import queryString from 'query-string';
 import CafeInfo from "../../components/cafeinfo/CafeInfo";
-import CafeThemeList from "../../components/cafeinfo/CafeThemeList";
+import CafeThemeList from "../../components/cafeinfo/cafetheme/CafeThemeList";
 import "./CafeInfoPage.scss"
 
 function CafeInfoPage() {

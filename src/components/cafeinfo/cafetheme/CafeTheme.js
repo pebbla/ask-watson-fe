@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import ThemePopup from "../../theme/ThemePopup";
 import "./CafeTheme.scss"
 
 function CafeTheme({theme}) {
+    const [isModalOpen, setModalOpen] = useState(false)
+
+    const openPopup = () => {
+        setModalOpen(true)
+    }
+
+    const onClose = () => {
+        setModalOpen(false)
+    }
     
     return <div className="cafe-info-theme-layout">
         <div className="theme-title-section">
             <h1>{theme.themeName}</h1>
-            <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} />
+            <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} onClick={openPopup}/>
+            <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
         </div>
         <div className="theme-info-section">
             <img className="theme-image" src={theme.imageUrl} alt={theme.themeName} />

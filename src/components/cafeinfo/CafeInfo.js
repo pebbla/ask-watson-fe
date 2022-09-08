@@ -36,7 +36,6 @@ function CafeInfo({cafe}) {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    // const [cafe, setCafe] = useState(null)
     const [isEditingCafe, setEditingCafe] = useState(false)
     const [locationMenus, setLocationMenus] = useState([])
 
@@ -48,11 +47,10 @@ function CafeInfo({cafe}) {
     const [cafeWebsiteTxt, setCafeWebsiteTxt] = useState(cafe.website)
     const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
     const [cafeLatitude, setCafeLatitude] = useState(cafe.geography.latitude)
-    
-    useEffect(() => {init()}, [])
 
+    useEffect(() => {init()}, [])
+    
     async function init() {
-        // getCafeInfo()
         getLocations()
     }
 
@@ -66,26 +64,6 @@ function CafeInfo({cafe}) {
             console.error("ERROR: " + error);
         })
     }
-
-    // async function getCafeInfo() {
-    //     await axios
-    //         .get("http://localhost:8080/v1/cafes/"+cafeId, config)
-    //         .then(response => {
-    //             setCafe(response.data['data']);
-    //             setCafeNameTxt(cafe.cafeName)
-    //             setCafePhoneNumTxt(cafe.cafePhoneNum)
-    //             setLocationId(cafe.location.id)
-    //             setCompanyId(cafe.company.id)
-    //             setEnglishPossibleYn(cafe.isEnglishPossible)
-    //             setCafeAddressTxt(cafe.address)
-    //             setCafeLongitude(cafe.geography.longitude)
-    //             setCafeLatitude(cafe.geography.latitude)
-    //             setCafeWebsiteTxt(cafe.website)
-    //         })
-    //         .catch((error) => {
-    //             console.error("ERROR: " + error);
-    //         })
-    // }
 
     async function modifyCafeInfo() {
         window.location.reload();
@@ -218,10 +196,10 @@ function CafeInfo({cafe}) {
                 <h2>지역</h2>
                 <h2>별점</h2>
                 <h2>영어가능</h2>
-                <h2>주소</h2>
-                <h2>위도 X</h2>
-                <h2>경도 Y</h2>
                 <h2>웹사이트</h2>
+                <h2>경도 X</h2>
+                <h2>위도 Y</h2>
+                <h2>주소</h2>
             </div>
             <div className="cafe-info__content">
                 {cafePhoneNumTxt !== null
@@ -256,28 +234,28 @@ function CafeInfo({cafe}) {
                     <label htmlFor="engImpos">불가능</label>
                 </div>
                 <div className="editing-cafe__input">
-                    <textarea value = {cafeAddressTxt} 
-                        onChange={changeCafeAddressTxt} 
-                        onKeyPress={onEnterKeyPressBlur}
-                        />
+                    <input type="text" value={ cafeWebsiteTxt } 
+                            onChange={changeCafeWebsite} 
+                            onKeyPress={onEnterKeyPressBlur}
+                            />
                 </div>
                 <div className="editing-cafe__input">
                     <input type="text" value={ cafeLongitude } 
                             onChange={changeCafeLongitude} 
                             onKeyPress={onEnterKeyPressBlur}
                             />
-                </div>
                 <div className="editing-cafe__input">
-                    <input type="text" value={ cafeLatitude } 
+                    <input type="number" value={ cafeLatitude } 
                             onChange={changeCafeLatitude} 
                             onKeyPress={onEnterKeyPressBlur}
                             />
                 </div>
+                </div>
                 <div className="editing-cafe__input">
-                    <input type="text" value={ cafeWebsiteTxt } 
-                            onChange={changeCafeWebsite} 
-                            onKeyPress={onEnterKeyPressBlur}
-                            />
+                    <textarea value = {cafeAddressTxt} 
+                        onChange={changeCafeAddressTxt} 
+                        onKeyPress={onEnterKeyPressBlur}
+                        />
                 </div>
             </div>
         </div>

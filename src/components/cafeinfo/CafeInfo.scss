@@ -15,6 +15,9 @@
     
     .image-section {
         margin-bottom: 40px;
+        width: 555px;
+        height: 330px;
+        background-color: $light-grey;
 
         img {
         width: 555px;
@@ -24,7 +27,6 @@
 
         .faArrowLeft {
             position: absolute;
-            z-index: 1;
             top: 5px;
             left: 9px;
             color: white;
@@ -41,12 +43,18 @@
 @media screen and (max-width:1400px){ 
     .cafe-info-layout {
         width: 380px;
-        
-        img {
+
+        .image-section {
             width: 385px;
             height: 225px;
-            object-fit: cover;
+                img {
+                width: 385px;
+                height: 225px;
+                object-fit: cover;
+            }
         }
+        
+        
     }
 
     .cafe-delete-btn {
@@ -114,21 +122,11 @@
     }
     
     &.editing-cafe {
-        
-
-        // .editing-cafe__input {
-        //     margin-top: 5px;
-        //     margin-bottom: 5px;
-        // }
-
         .cafe-info__title {
             line-height: 2.6;
 
-            h2:nth-last-child(3){
-                padding-top:57px;
-            }
             h2:last-of-type {
-                margin-bottom: 60px;
+                margin-bottom: 120px;
             }
         }
 
