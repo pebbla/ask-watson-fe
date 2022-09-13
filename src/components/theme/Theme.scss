@@ -1,0 +1,90 @@
+@import "../../styles/common.scss";
+
+.theme-layout {
+    margin-bottom: 35px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $light-grey;
+    width: 555px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .theme-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .theme-info-section {
+        display: flex;
+        // align-items: flex-start;
+
+        .theme-image {
+            border-radius: 5px;
+            width: 125px;
+            height: 125px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightgrey;
+            font-size: 12px;
+            margin-right: 20px;
+
+            img {
+                border-radius: 5px;
+                width: 125px;
+                height: 125px;
+            }
+        }
+
+        .theme-info {
+            width: 340px;
+            height: 125px;
+            display: flex;
+            flex-direction: row;
+            line-height: 1.4;
+
+            .theme-info__upper {
+                display: flex;
+            }
+
+            .theme-info__lower {
+                margin-top: 8px;
+            }
+
+            .theme-info__part {
+                display: flex;
+                flex: 1;
+
+                h2 {
+                    flex:0.2;
+                }
+            }
+
+            .theme-info__title {
+                width:80px;
+                height:100%;
+            
+                h2 {
+                    font-weight: bold;
+                }
+            }
+
+            .theme-info__content {
+                width: 100px;
+                flex: 1;
+                height:100%;
+            }
+            
+        }
+    }
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}

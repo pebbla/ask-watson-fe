@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CafeTheme from "./CafeTheme";
-import NewThemePopup from "../../theme/NewThemePopup";
+import NewThemePopup from "../../../components/theme/popup/NewThemePopup";
 import "./CafeThemeList.scss"
 
 function CafeThemeList({cafeId}) {

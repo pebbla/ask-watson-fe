@@ -76,7 +76,6 @@ function CafeInfo({cafe}) {
                 address: cafeAddressTxt,
                 imageUrl: cafe.imageUrl,
                 locationId: locationId,
-                companyId: cafe.company.id,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: englishPossibleYn

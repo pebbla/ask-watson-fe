@@ -82,7 +82,6 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                 address: cafeAddressTxt,
                 imageUrl: cafeImageUrl,
                 locationId: cafeLocationId,
-                companyId: 1,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: cafeEnglishPossibleYn

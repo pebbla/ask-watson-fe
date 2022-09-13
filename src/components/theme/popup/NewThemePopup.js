@@ -96,9 +96,9 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
         txtSetter(e.target.value);
     }
 
-    return <Modal className='theme-popup-screen' isOpen = {isOpen} ariaHideApp={false} onClick={(e) => e.stopPropagation()}>
+    return <Modal className='theme-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
-            <div className='theme-popup-layout'>
+            <div className='theme-popup-layout' onClick={(e) => e.stopPropagation()}>
                 <FontAwesomeIcon className="faX" icon={faX} onClick={onClose}/>
                 <div className="theme-name"><input type="text" value={ themeNameTxt } 
                     onChange={(e) => changeTxt(e, setThemeNameTxt)} 

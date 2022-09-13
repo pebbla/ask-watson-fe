@@ -9,7 +9,7 @@
     border-bottom: 1px solid $light-grey;
 }
 
-.theme-title-section {
+.cafe-info-theme-layout .theme-title-section {
     display: flex;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@
     }
 }
 
-.theme-info-section {
+.cafe-info-theme-layout .theme-info-section {
     display: flex;
     flex:1;
 
@@ -55,7 +55,7 @@
             
         }
         .theme-info__lower {
-            line-height: 1.9;
+            margin-top: 10px;
         }
 
         .theme-info__part {

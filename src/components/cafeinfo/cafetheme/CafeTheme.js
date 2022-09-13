@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import ThemePopup from "../../theme/ThemePopup";
+import ThemePopup from "../../../components/theme/popup/ThemePopup";
 import "./CafeTheme.scss"
 
 function CafeTheme({theme}) {
