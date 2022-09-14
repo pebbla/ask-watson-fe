@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./GoogleStorageFileUploader.scss"
 
 function GoogleStorageFileUploader({setUrl}) {
   // const [url, setUrl] = useState("");
@@ -24,11 +25,12 @@ function GoogleStorageFileUploader({setUrl}) {
     setFile(img);
   };
   
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" name="file" onChange={handleFileChange}></input>
-      <button type="submit">Submit</button>
-    </form>
+  return (<div className="file-uploader-layout">
+      <form onSubmit={handleSubmit}>
+        <input type="file" name="file" onChange={handleFileChange}></input>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 }
 export default GoogleStorageFileUploader;

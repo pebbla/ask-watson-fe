@@ -16,7 +16,7 @@ const multer = Multer({
 app.use(cors());
 
 const cloudStorage = new Storage({
-  keyFilename: `./src/server/key/pelagic-berm-360511-71c14e380658.json`,
+  keyFilename: `./server/key/pelagic-berm-360511-71c14e380658.json`,
   projectId: "pelagic-berm-360511",
 });
 
@@ -29,7 +29,7 @@ app.post("/upload-file-to-cloud-storage", multer.single("file"), function (req, 
     return;
   }
 
-  const blob = bucket.file(req.file.originalname);
+  const blob = bucket.file("test/front/" + req.file.originalname);
   const blobStream = blob.createWriteStream();
   blobStream.on("error", (err) => {
     next(err);
@@ -39,6 +39,7 @@ app.post("/upload-file-to-cloud-storage", multer.single("file"), function (req, 
     // The public URL can be used to directly access the file via HTTP.
     const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
     res.status(200).json({ publicUrl });
+    console.log("publicUrl: " + publicUrl);
   });
   blobStream.end(req.file.buffer);
   console.log(req.file);
