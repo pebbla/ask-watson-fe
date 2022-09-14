@@ -29,7 +29,11 @@ app.post("/upload-file-to-cloud-storage", multer.single("file"), function (req, 
     return;
   }
 
-  const blob = bucket.file("test/front/" + req.file.originalname);
+  console.log("req: ");
+  console.dir(req)
+  console.log("dst-folder: " + req.body["dst-folder"]);
+
+  const blob = bucket.file("test/front/"+ req.body["dst-folder"] + "/" + req.file.originalname);
   const blobStream = blob.createWriteStream();
   blobStream.on("error", (err) => {
     next(err);

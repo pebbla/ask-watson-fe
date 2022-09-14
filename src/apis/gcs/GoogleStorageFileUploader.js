@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./GoogleStorageFileUploader.scss"
 
-function GoogleStorageFileUploader({setUrl}) {
-  // const [url, setUrl] = useState("");
+function GoogleStorageFileUploader({setUrl, dstFolder}) {
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", file.data);
+    formData.append("dst-folder", dstFolder);
     const response = await fetch("http://localhost:5001/upload-file-to-cloud-storage", {
       method: "POST",
       body: formData,

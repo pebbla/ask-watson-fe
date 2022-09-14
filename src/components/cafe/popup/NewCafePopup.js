@@ -69,7 +69,6 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
     }
 
     async function addCafe() {
-        console.log(cafeImageUrl);
         if(cafeNameTxt === "") window.alert("카페 이름을 입력해주세요.")
         else if(cafePhoneNumTxt === "") window.alert("전화번호를 입력해주세요.")
         else if(cafeLocationId == null) window.alert("카페 위치를 선택해주세요.")
@@ -104,8 +103,6 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
         setCafeEnglishPossibleYn(e.target.value === "가능")
     }
 
-    
-
     return <Modal className='cafe-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
             <div className='cafe-popup-layout' onClick={(e) => e.stopPropagation()}>
@@ -115,7 +112,7 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="카페 제목을 입력해주세요."/></div>
                 <div className="cafe-image-bg">
-                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl}/></div>
+                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe"/></div>
                     { cafeImageUrl !== "" ? <img className="cafe-image" src={cafeImageUrl} alt={cafeNameTxt} /> : <div></div>}
                 </div>
                 <div className="cafe-changable-info">
