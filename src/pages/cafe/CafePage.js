@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 // import CafeSearchBar from "../../components/searchbar/CafeSearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import CafeList from "../../components/cafe/CafeList";
+import CafeList from "../../components/cafe/CafeList.js";
 import "./CafePage.scss"
-import NewCafePopup from "../../components/cafe/popup/NewCafePopup";
+import NewCafePopup from "../../components/cafe/popup/NewCafePopup.js";
 
 function CafePage() {
     const [searchWord, setSearchWord] = useState("")

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Theme from "./Theme";
+import Theme from "./Theme.js";
 import "./ThemeList.scss"
 
 function ThemeList({searchWord}) {

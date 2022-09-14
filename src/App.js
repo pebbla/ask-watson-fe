@@ -1,11 +1,11 @@
 
 import React from "react";
-import SideBar from "./components/common/sidebar/SideBar";
+import SideBar from "./components/common/sidebar/SideBar.js";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
-import CafePage from "./pages/cafe/CafePage";
-import CafeInfoPage from "./pages/cafe/CafeInfoPage"
+import CafePage from "./pages/cafe/CafePage.js";
+import CafeInfoPage from "./pages/cafe/CafeInfoPage.js"
 import "./App.css";
-import ThemePage from "./pages/theme/ThemePage";
+import ThemePage from "./pages/theme/ThemePage.js";
 
 function App() {
 

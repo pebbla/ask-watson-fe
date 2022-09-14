@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import ThemeList from "../../components/theme/ThemeList";
+import ThemeList from "../../components/theme/ThemeList.js";
 import "./ThemePage.scss"
-import NewThemePopup from "../../components/theme/popup/NewThemePopup";
+import NewThemePopup from "../../components/theme/popup/NewThemePopup.js";
 
 function ThemePage() {
     const [searchWord, setSearchWord] = useState("")

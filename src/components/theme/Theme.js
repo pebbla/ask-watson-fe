@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { NavLink, Route } from 'react-router-dom';
-import ThemePopup from "./popup/ThemePopup";
+import ThemePopup from "./popup/ThemePopup.js";
 import "./Theme.scss"
 function Theme({theme}) {
     var config = {
