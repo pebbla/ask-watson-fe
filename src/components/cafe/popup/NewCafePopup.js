@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./NewCafePopup.scss"
+import GoogleStorageFileUploader from '../../../apis/gcs/GoogleStorageFileUploader.js';
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -82,7 +83,6 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                 address: cafeAddressTxt,
                 imageUrl: cafeImageUrl,
                 locationId: cafeLocationId,
-                companyId: 1,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: cafeEnglishPossibleYn
@@ -112,9 +112,8 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="카페 제목을 입력해주세요."/></div>
                 <div className="cafe-image-bg">
-                    {cafeImageUrl === ""
-                    ? <h6>사진 추가하기</h6>
-                    : <img className="cafe-image" src={""} alt={cafeNameTxt} />}
+                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe"/></div>
+                    { cafeImageUrl !== "" ? <img className="cafe-image" src={cafeImageUrl} alt={cafeNameTxt} /> : <div></div>}
                 </div>
                 <div className="cafe-changable-info">
                     <div className="cafe-info__title">

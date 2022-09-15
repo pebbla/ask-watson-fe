@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cafe from "./Cafe";
+import Cafe from "./Cafe.js";
 import "./CafeList.scss"
 
 function CafeList({searchWord}) {

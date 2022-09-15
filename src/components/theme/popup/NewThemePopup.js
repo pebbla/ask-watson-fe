@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./NewThemePopup.scss"
+import GoogleStorageFileUploader from '../../../apis/gcs/GoogleStorageFileUploader.js';
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -96,18 +97,20 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
         txtSetter(e.target.value);
     }
 
-    return <Modal className='theme-popup-screen' isOpen = {isOpen} ariaHideApp={false} onClick={(e) => e.stopPropagation()}>
+    return <Modal className='new-theme-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
-            <div className='theme-popup-layout'>
+            <div className='theme-popup-layout' onClick={(e) => e.stopPropagation()}>
                 <FontAwesomeIcon className="faX" icon={faX} onClick={onClose}/>
                 <div className="theme-name"><input type="text" value={ themeNameTxt } 
                     onChange={(e) => changeTxt(e, setThemeNameTxt)} 
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className="image-bg">
-                    {themeImageUrl === ""
+                <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme"/></div>
+                    { themeImageUrl !== "" ? <img className="theme-image" src={themeImageUrl} alt={themeNameTxt} /> : <div></div>}
+                    {/* {themeImageUrl === ""
                     ? <h6>사진 추가하기</h6>
-                    : <img className="theme-image" src={""} alt={themeNameTxt} />}
+                    : <img className="theme-image" src={""} alt={themeNameTxt} />} */}
                 </div>
                 <div className="theme-changable-info">
                     <div className="theme-info__title">

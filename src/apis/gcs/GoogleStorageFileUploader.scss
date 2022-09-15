@@ -1,0 +1,18 @@
+.file-uploader-layout {
+    z-index: 3;
+    position: fixed;
+    background-color: #FFFFFF30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    form {
+        margin-left: 10px;
+    }
+
+    input {
+        width: 200px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+    }
+}

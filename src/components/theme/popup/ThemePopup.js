@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./ThemePopup.scss"
+import GoogleStorageFileUploader from '../../../apis/gcs/GoogleStorageFileUploader.js';
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -43,6 +44,7 @@ function ThemePopup({theme, onClose, isOpen}) {
     const [themeMinNumPeople, setThemeMinNumPeople] = useState(theme.minNumPeople)
     const [themePrice, setThemePrice] = useState(theme.price)
     const [themeReservationUrlTxt, setThemeReservationUrlTxt] = useState(theme.reservationUrl)
+    const [themeImageUrl, setThemeImageUrl] = useState(theme.imageUrl)
 
     const handleChangeOnLocationSelectBox = (e) => {
         setThemeCategoryId(e.target.value)
@@ -66,6 +68,7 @@ function ThemePopup({theme, onClose, isOpen}) {
     }
 
     async function modifyThemeInfo() {
+        console.log("ThemePopup: " + themeImageUrl)
         if(themeNameTxt === "") window.alert("테마 제목을 입력해주세요.")
         else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
@@ -80,7 +83,7 @@ function ThemePopup({theme, onClose, isOpen}) {
                 minNumPeople: themeMinNumPeople,
                 price: themePrice,
                 reservationUrl: themeReservationUrlTxt,
-                imageUrl: theme.imageUrl,
+                imageUrl: themeImageUrl,
                 difficulty: theme.difficulty
             }, config)
             .then((response) => {
@@ -146,7 +149,10 @@ function ThemePopup({theme, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className='image-and-unchangable-info'>
-                    <img className="theme-image" src={theme.imageUrl} alt={theme.themeName} />
+                    <div className='image-section'>
+                        <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme"/></div>
+                        { themeImageUrl !== "" ? <img className="theme-image" src={themeImageUrl} alt={themeNameTxt} /> : <div></div>}
+                    </div>
                     <div className='unchangable-info'>
                         <div className="theme-info__part">
                             <div className="theme-info__title">

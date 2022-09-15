@@ -1,8 +1,8 @@
 @import "../../styles/common.scss";
 
-.cafe-layout {
+.theme-layout {
     margin-bottom: 35px;
-    padding-bottom: 35px;
+    padding-bottom: 30px;
     border-bottom: 1px solid $light-grey;
     width: 555px;
 
@@ -10,16 +10,17 @@
         cursor: pointer;
     }
 
-    .cafe-name {
+    .theme-name {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 15px;
     }
 
-    .cafe-info-section {
+    .theme-info-section {
         display: flex;
+        // align-items: flex-start;
 
-        .cafe-image {
+        .theme-image {
             border-radius: 5px;
             width: 125px;
             height: 125px;
@@ -38,13 +39,31 @@
             }
         }
 
-        .cafe-info {
+        .theme-info {
             width: 340px;
             height: 125px;
             display: flex;
-            line-height: 1.2;
+            flex-direction: row;
+            line-height: 1.4;
 
-            .cafe-info__title {
+            .theme-info__upper {
+                display: flex;
+            }
+
+            .theme-info__lower {
+                margin-top: 8px;
+            }
+
+            .theme-info__part {
+                display: flex;
+                flex: 1;
+
+                h2 {
+                    flex:0.2;
+                }
+            }
+
+            .theme-info__title {
                 width:80px;
                 height:100%;
             
@@ -53,8 +72,9 @@
                 }
             }
 
-            .cafe-info__content {
-                width:260px;
+            .theme-info__content {
+                width: 100px;
+                flex: 1;
                 height:100%;
             }
             

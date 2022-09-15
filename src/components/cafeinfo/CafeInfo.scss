@@ -19,6 +19,11 @@
         height: 330px;
         background-color: $light-grey;
 
+        .file-uploader-layout {
+            width: 555px;
+            height: 330px;
+        }
+
         img {
         width: 555px;
         height: 330px;
@@ -47,7 +52,13 @@
         .image-section {
             width: 385px;
             height: 225px;
-                img {
+
+            .file-uploader-layout {
+                width: 385px;
+                height: 225px;
+            }
+    
+            img {
                 width: 385px;
                 height: 225px;
                 object-fit: cover;

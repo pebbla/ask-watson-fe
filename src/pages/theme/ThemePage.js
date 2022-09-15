@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import CafeSearchBar from "../../components/searchbar/CafeSearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import CafeList from "../../components/cafe/CafeList.js";
-import "./CafePage.scss"
-import NewCafePopup from "../../components/cafe/popup/NewCafePopup.js";
+import ThemeList from "../../components/theme/ThemeList.js";
+import "./ThemePage.scss"
+import NewThemePopup from "../../components/theme/popup/NewThemePopup.js";
 
-function CafePage() {
+function ThemePage() {
     const [searchWord, setSearchWord] = useState("")
     const [searchTxt, setSearchTxt] = useState("");
     const [isModalOpen, setModalOpen] = useState(false)
@@ -32,26 +31,26 @@ function CafePage() {
         }
     }
 
-    return <div className = "cafe-page-layout">
-        <div className="cafe-search-section">
-            <div className="cafe-search-bar">
+    return <div className = "theme-page-layout">
+        <div className="theme-search-section">
+            <div className="theme-search-bar">
                 <FontAwesomeIcon className="faMagnifyingGlass" icon={faMagnifyingGlass} />
                 <input type="text" value={searchTxt} 
                     onChange={changeSearchTxt}
                     onKeyPress={onEnterKeyPressBlur}
-                    placeholder = "카페 검색하기"
+                    placeholder = "테마 검색하기"
                 /> 
             </div>
-            <div className="cafe-search-btn" onClick={()=>setSearchWord(searchTxt)}>
+            <div className="theme-search-btn" onClick={()=>setSearchWord(searchTxt)}>
                 <h1>검색</h1>
             </div>
         </div>
-        <div className="add-cafe-btn" onClick={openPopup}>
+        {/* <div className="add-theme-btn" onClick={openPopup}>
             <h2>+</h2>
         </div>
-        <NewCafePopup onClose={onClose} isOpen={isModalOpen}/>
-        <CafeList key = {searchWord} searchWord={searchWord}/>
+        <NewThemePopup onClose={onClose} isOpen={isModalOpen}/> */}
+        <ThemeList key = {searchWord} searchWord={searchWord}/>
     </div>;
 }
 
-export default CafePage;
+export default ThemePage;

@@ -4,6 +4,7 @@ import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faPencil } from "@fortawesome/free-solid-svg-icons"
 import "./CafeInfo.scss"
+import GoogleStorageFileUploader from "../../apis/gcs/GoogleStorageFileUploader.js"
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -47,6 +48,7 @@ function CafeInfo({cafe}) {
     const [cafeWebsiteTxt, setCafeWebsiteTxt] = useState(cafe.website)
     const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
     const [cafeLatitude, setCafeLatitude] = useState(cafe.geography.latitude)
+    const [cafeImageUrl, setCafeImageUrl] = useState(cafe.imageUrl)
 
     useEffect(() => {init()}, [])
     
@@ -66,22 +68,26 @@ function CafeInfo({cafe}) {
     }
 
     async function modifyCafeInfo() {
-        window.location.reload();
-        await axios
+        if(cafeNameTxt === "") window.alert("카페 이름을 입력해주세요.")
+        else if(cafePhoneNumTxt === "") window.alert("전화번호를 입력해주세요.")
+        else if(locationId == null) window.alert("카페 위치를 선택해주세요.")
+        else if(cafeLongitude == null) window.alert("경도를 입력해주세요.")
+        else if(cafeLatitude == null) window.alert("위도를 입력해주세요.")
+        else await axios
             .put("http://localhost:8080/v1/admin/cafes/" + cafe.id,
             {
                 cafeName: cafeNameTxt,
                 cafePhoneNum: cafePhoneNumTxt,
                 website: cafeWebsiteTxt,
                 address: cafeAddressTxt,
-                imageUrl: cafe.imageUrl,
+                imageUrl: cafeImageUrl,
                 locationId: locationId,
-                companyId: cafe.company.id,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: englishPossibleYn
             }, config)
             .then((response) => {
+                window.location.reload();
                 console.log(response.data['data']);
             })
             .catch((error) => {console.error(error);});
@@ -141,46 +147,25 @@ function CafeInfo({cafe}) {
         setEnglishPossibleYn(e.target.value === "가능")
     }
 
-    function changeCafeNameTxt(e) {
+    function changeTxt(e, txtSetter) {
         e.preventDefault();
-        setCafeNameTxt(e.target.value)
-    }
-
-    function changeCafePhoneNumTxt(e) {
-        e.preventDefault();
-        setCafePhoneNumTxt(e.target.value);
-    }
-
-    function changeCafeAddressTxt(e) {
-        e.preventDefault();
-        setCafeAddressTxt(e.target.value);
-    }
-
-    function changeCafeWebsite(e) {
-        e.preventDefault();
-        setCafeWebsiteTxt(e.target.value);
-    }
-
-    function changeCafeLongitude(e) {
-        e.preventDefault();
-        setCafeLongitude(e.target.value);
-    }
-
-    function changeCafeLatitude(e) {
-        e.preventDefault();
-        setCafeLatitude(e.target.value);
+        txtSetter(e.target.value);
     }
 
     return cafe != null 
     ? <div className="cafe-info-layout">
         <div className="image-section">
-            <img src={cafe.imageUrl} alt={cafe.cafeName} />
+            {isEditingCafe
+                ? <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe"/></div>
+                : <div></div>
+            }
+            <img src={cafeImageUrl} alt={cafe.cafeName} />
             <FontAwesomeIcon className="faArrowLeft" icon={faArrowLeft} onClick={() => navigate(-1)} />
         </div>
         <div className="cafe-title-section mg_left mg_right">
             {isEditingCafe
             ? <input type="text" value={ cafeNameTxt } 
-                onChange={changeCafeNameTxt} 
+                onChange={(e) => changeTxt(e, setCafeNameTxt)} 
                 onKeyPress={onEnterKeyPressBlur}
                 placeholder = {cafe.cafeName}
                 />
@@ -205,7 +190,7 @@ function CafeInfo({cafe}) {
                 {cafePhoneNumTxt !== null
                     ? <div className="editing-cafe__input">
                         <input type="text" value={ cafePhoneNumTxt } 
-                            onChange={changeCafePhoneNumTxt} 
+                            onChange={(e) => changeTxt(e, setCafePhoneNumTxt)} 
                             onKeyPress={onEnterKeyPressBlur}
                             />
                     </div>
@@ -235,25 +220,27 @@ function CafeInfo({cafe}) {
                 </div>
                 <div className="editing-cafe__input">
                     <input type="text" value={ cafeWebsiteTxt } 
-                            onChange={changeCafeWebsite} 
+                            onChange={(e) => changeTxt(e, setCafeWebsiteTxt)} 
                             onKeyPress={onEnterKeyPressBlur}
                             />
                 </div>
                 <div className="editing-cafe__input">
-                    <input type="text" value={ cafeLongitude } 
-                            onChange={changeCafeLongitude} 
+                    <input type="number" value={ cafeLongitude } 
+                            onChange={(e) => changeTxt(e, setCafeLongitude)} 
                             onKeyPress={onEnterKeyPressBlur}
+                            step="0.000000000000000000000001"
                             />
                 <div className="editing-cafe__input">
                     <input type="number" value={ cafeLatitude } 
-                            onChange={changeCafeLatitude} 
+                            onChange={(e) => changeTxt(e, setCafeLatitude)} 
                             onKeyPress={onEnterKeyPressBlur}
+                            step="0.000000000000000000000001"
                             />
                 </div>
                 </div>
                 <div className="editing-cafe__input">
                     <textarea value = {cafeAddressTxt} 
-                        onChange={changeCafeAddressTxt} 
+                        onChange={(e) => changeTxt(e, setCafeAddressTxt)} 
                         onKeyPress={onEnterKeyPressBlur}
                         />
                 </div>
