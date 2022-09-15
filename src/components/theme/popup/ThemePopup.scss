@@ -67,26 +67,37 @@
 } 
 
 .image-and-unchangable-info {
-    display: flex;
-    align-items: center;
     margin-bottom: 20px;
+
+    .image-section {
+        position: absolute;
+        top: 110px;
+        left: 440px;
+    }
+
+    .file-uploader-layout {
+        width: 200px;
+        height: 200px;
+    }
 
     .theme-image {
         border-radius: 5px;
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
         margin-right: 20px;
+        object-fit: cover;
     }
 
     .unchangable-info {
         display: flex;
-        margin-left: 10px;
-        flex: 1;
+        padding-bottom: 20px;
+        width: 370px;
+        border-bottom: 1px solid #eeeeee;
 
         .theme-info__part {
             display: flex;
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 2.0;
             flex: 0.6;
 
             .theme-info__title {
