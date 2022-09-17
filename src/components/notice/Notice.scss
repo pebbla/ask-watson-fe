@@ -1,0 +1,30 @@
+@import "../../styles/common.scss";
+
+.notice-layout {
+    margin-bottom: 35px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $light-grey;
+    display: block;
+    width: 100%;
+    height: 140px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .notice-title {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .notice-date {
+        margin-bottom: 20px;
+        color: #969696;
+    }
+
+    .notice-content {
+        line-height: 1.6;
+    }
+
+}
