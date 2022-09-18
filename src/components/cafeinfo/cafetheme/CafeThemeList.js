@@ -10,7 +10,6 @@ function CafeThemeList({cafeId}) {
     };
 
     const [themeList, setThemeList] = useState([])
-
     const [isModalOpen, setModalOpen] = useState(false)
 
     const openPopup = () => {
@@ -21,6 +20,7 @@ function CafeThemeList({cafeId}) {
         setModalOpen(false)
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {getCafeThemes()}, [])
 
     async function getCafeThemes() {

@@ -171,7 +171,9 @@ function CafeInfo({cafe}) {
                 />
             : <h1>{cafe.cafeName}</h1>}
             {isEditingCafe
-            ? <h5 onClick={()=>onClickEditingDone()}>수정완료</h5>
+            ? <div className="modify-cafe-btn" onClick={() => onClickEditingDone()}>
+                <h2>수정완료</h2>
+            </div>
             : <FontAwesomeIcon className="faPencil" icon={faPencil} onClick={() => setEditingCafe(true)} />}
         </div>
         {isEditingCafe

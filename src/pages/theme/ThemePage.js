@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import ThemeList from "../../components/theme/ThemeList.js";
 import "./ThemePage.scss"
-import NewThemePopup from "../../components/theme/popup/NewThemePopup.js";
 
 function ThemePage() {
     const [searchWord, setSearchWord] = useState("")
     const [searchTxt, setSearchTxt] = useState("");
-    const [isModalOpen, setModalOpen] = useState(false)
-
-    const openPopup = () => {
-        setModalOpen(true)
-    }
-
-    const onClose = () => {
-        setModalOpen(false)
-    }
 
     function changeSearchTxt(e) {
         e.preventDefault();
@@ -45,10 +35,6 @@ function ThemePage() {
                 <h1>검색</h1>
             </div>
         </div>
-        {/* <div className="add-theme-btn" onClick={openPopup}>
-            <h2>+</h2>
-        </div>
-        <NewThemePopup onClose={onClose} isOpen={isModalOpen}/> */}
         <ThemeList key = {searchWord} searchWord={searchWord}/>
     </div>;
 }

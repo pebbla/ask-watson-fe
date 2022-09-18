@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "./Notice.scss"
 
 function Notice({notice}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
-
     var date = (notice.createdAt == null) ? " " : notice.createdAt;
     var title = (notice.title == null) ? " " : notice.title;
     var content = (notice.content == null) ? " " : notice.content;

@@ -29,6 +29,7 @@ function FaqInfoPage() {
         }
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {getFaqInfo()}, [])
 
     async function getFaqInfo() {

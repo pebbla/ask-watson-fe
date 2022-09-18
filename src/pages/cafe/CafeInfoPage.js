@@ -14,6 +14,7 @@ function CafeInfoPage() {
 
     const [cafe, setCafe] = useState(null)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {getCafeInfo()}, [])
 
     async function getCafeInfo() {

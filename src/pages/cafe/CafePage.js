@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import CafeSearchBar from "../../components/searchbar/CafeSearchBar";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CafeList from "../../components/cafe/CafeList.js";

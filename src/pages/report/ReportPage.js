@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faUnsorted } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import ReportList from "../../components/report/ReportList.js";
 import "./ReportPage.scss"
 

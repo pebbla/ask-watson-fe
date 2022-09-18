@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { NavLink, Route } from 'react-router-dom';
 import ThemePopup from "./popup/ThemePopup.js";
 import "./Theme.scss"
 function Theme({theme}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
-
     const [isModalOpen, setModalOpen] = useState(false)
 
     const openPopup = () => {
@@ -19,7 +13,6 @@ function Theme({theme}) {
     }
 
     return <div className="theme-layout" onClick={openPopup}>
-        {/* <NavLink to={`/themes/info?cid=${theme.id}`}> */}
         <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
         <h1 className="theme-name">{theme.id}. {theme.themeName}</h1>
         <div className="theme-info-section">
@@ -63,7 +56,6 @@ function Theme({theme}) {
                 </div>
             </div>
         </div>
-        {/* </NavLink> */}
     </div>
 }
 

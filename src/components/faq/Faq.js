@@ -5,10 +5,6 @@ import { NavLink } from 'react-router-dom';
 import "./Faq.scss"
 
 function Faq({faq}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
-
     var title = (faq.title == null) ? " " : faq.title;
     var content = (faq.content == null) ? " " : faq.content;
     if(title.length > 77) title = title.substring(0, 75) + "..."

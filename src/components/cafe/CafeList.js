@@ -13,6 +13,7 @@ function CafeList({searchWord}) {
     const [cafeList, setCafeList] = useState([])
     const [isSortedByUpdate, setSortByUpdate] = useState(false)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {getCafeList()}, [isSortedByUpdate])
 
     async function getCafeList() {
