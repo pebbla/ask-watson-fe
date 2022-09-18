@@ -7,6 +7,7 @@
     display: block;
     width: 100%;
     height: 140px;
+    position: relative;
 
     &:hover {
         cursor: pointer;
@@ -27,4 +28,15 @@
         line-height: 1.6;
     }
 
+    .faArrowRight {
+        font-size: 22px;
+        color: $grey;
+        position: absolute;
+        top: 0px;
+        right: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
