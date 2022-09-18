@@ -46,6 +46,7 @@ function NewFaqPage() {
                 onChange={(e) => changeTxt(e, setTitleTxt)} 
                 onKeyPress={onEnterKeyPressBlur}
                 placeholder = "제목을 입력해주세요"
+                maxLength={255}
                 />
         </div>
         <div className="content-section">
