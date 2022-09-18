@@ -1,0 +1,62 @@
+@import "../../styles/common.scss";
+
+.report-page-layout {
+    margin-left: $sidebar-width;
+    padding: 40px;
+
+   
+}
+
+.report-search-section {
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+}
+
+.report-search-bar {
+    border: 1px solid $light-grey;
+    border-radius: 5px;
+    width: 900px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-right: 50px;
+
+    .faMagnifyingGlass {
+        color: $light-grey;
+        font-size: 17px;
+        margin-right: 10px;
+    }
+
+    input {
+        outline:none;
+        border: none;
+        height: 30px;
+        width: 100%;
+
+        &::placeholder {
+            color: $grey;
+        }
+    }
+}
+
+.report-search-btn {
+    border: 1px solid balck;
+    border-radius: 5px;
+    width: 151px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+
+    h1 {
+        text-align: center;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
