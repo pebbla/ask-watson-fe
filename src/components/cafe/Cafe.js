@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { NavLink, Route } from 'react-router-dom';
+import React from "react";
+import { NavLink } from 'react-router-dom';
 import "./Cafe.scss"
 function Cafe({cafe}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
 
     return <div className="cafe-layout">
         <NavLink to={`/cafes/info?cid=${cafe.id}`}>

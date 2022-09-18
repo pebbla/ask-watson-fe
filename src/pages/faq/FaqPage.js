@@ -1,22 +1,13 @@
 import React, { useState } from "react";
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import CafeList from "../../components/cafe/CafeList.js";
-import "./CafePage.scss"
-import NewCafePopup from "../../components/cafe/popup/NewCafePopup.js";
+import FaqList from "../../components/faq/FaqList.js";
+import "./FaqPage.scss"
 
-function CafePage() {
+function FaqPage() {
     const [searchWord, setSearchWord] = useState("")
     const [searchTxt, setSearchTxt] = useState("");
-    const [isModalOpen, setModalOpen] = useState(false)
-
-    const openPopup = () => {
-        setModalOpen(true)
-    }
-
-    const onClose = () => {
-        setModalOpen(false)
-    }
 
     function changeSearchTxt(e) {
         e.preventDefault();
@@ -31,26 +22,28 @@ function CafePage() {
         }
     }
 
-    return <div className = "cafe-page-layout">
-        <div className="cafe-search-section">
-            <div className="cafe-search-bar">
+    return <div className = "faq-page-layout">
+        <div className="faq-search-section">
+            <div className="faq-search-bar">
                 <FontAwesomeIcon className="faMagnifyingGlass" icon={faMagnifyingGlass} />
                 <input type="text" value={searchTxt} 
                     onChange={changeSearchTxt}
                     onKeyPress={onEnterKeyPressBlur}
-                    placeholder = "카페 검색하기"
+                    placeholder = "FAQ 검색하기"
                 /> 
             </div>
-            <div className="cafe-search-btn" onClick={()=>setSearchWord(searchTxt)}>
+            <div className="faq-search-btn" onClick={()=>setSearchWord(searchTxt)}>
                 <h1>검색</h1>
             </div>
         </div>
-        <div className="add-cafe-btn" onClick={openPopup}>
-            <h2>+</h2>
-        </div>
-        <NewCafePopup onClose={onClose} isOpen={isModalOpen}/>
-        <CafeList key = {searchWord} searchWord={searchWord}/>
+        <NavLink to={`/faqs/new`}>
+            <div className="add-faq-btn">
+            
+                <h2>+</h2>
+            </div>
+        </NavLink>
+        <FaqList key = {searchWord} searchWord={searchWord}/>
     </div>;
 }
 
-export default CafePage;
+export default FaqPage;

@@ -31,11 +31,12 @@
         }   
 
         .faArrowLeft {
-            position: absolute;
+            position: fixed;
             top: 5px;
-            left: 9px;
+            left: $sidebar-width + 9px;
             color: white;
             font-size: 28px;
+            z-index: 6;
 
             &:hover {
                 cursor: pointer;
@@ -64,8 +65,6 @@
                 object-fit: cover;
             }
         }
-        
-        
     }
 
     .cafe-delete-btn {
@@ -80,7 +79,13 @@
 .cafe-title-section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
+
+    input {
+        height: fit-content;
+        z-index: 5;
+    }
 
     h1 {
         font-size: 26px;
@@ -91,6 +96,30 @@
         font-size: 14px;
         color: $grey;
         text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .modify-cafe-btn {
+        background-color: black;
+        margin: 10px;
+        margin-bottom: 0;
+        height: 51px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        right: 10px;
+        width: 150px;
+        z-index: 5;
+
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
 
         &:hover {
             cursor: pointer;

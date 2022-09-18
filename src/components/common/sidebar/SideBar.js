@@ -9,8 +9,8 @@ function SideBar() {
         { name: "방탈출 테마", path: "/themes" },
         { name: "공지", path: "/notices" },
         { name: "FAQ", path: "/faqs" },
-        { name: "회원 관리", path: "/user-managements" },
-        { name: "신고 처리", path: "/report-processes" },
+        { name: "회원 관리", path: "/users" },
+        { name: "신고 처리", path: "/reports" },
     ]
 
     return (

@@ -1,0 +1,45 @@
+@import "../../styles/common.scss";
+
+.notice-layout {
+    margin-bottom: 35px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $light-grey;
+    display: block;
+    width: 100%;
+    min-height: 140px;
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .notice-title {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-bottom: 30px;
+        padding-right: 90px;
+        line-height: 1.3;
+    }
+
+    .notice-date {
+        margin-bottom: 20px;
+        color: #969696;
+    }
+
+    .notice-content {
+        line-height: 1.6;
+    }
+
+    .faArrowRight {
+        font-size: 22px;
+        color: $grey;
+        position: absolute;
+        top: 0px;
+        right: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

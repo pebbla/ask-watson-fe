@@ -2,8 +2,45 @@
 
 .theme-list-layout {
     display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .sort-btn {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: -10px;
+        right: 65px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .circle {
+            width: 13px;
+            height: 13px;
+            border: 1px solid $grey;
+            border-radius: 10px;
+        }
+    
+        .faCheckCircle {
+            font-size: 15px;
+            color: $grey;
+        }
+    
+        h6 {
+            font-size: 14px;
+            color: $grey;
+            margin-left: 5px;
+        }
+    }
+}
+
+.theme-list {
+    display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
+    margin-top: 10px;
     width: 1100px;
     width: 100%;
     height: 670px;
@@ -12,7 +49,7 @@
 }
 
 /* 스크롤바 너비 설정 */ 
-.theme-list-layout::-webkit-scrollbar{ 
+.theme-list::-webkit-scrollbar{ 
     width: 6px; 
     float: right;
     position: absolute;
@@ -20,7 +57,7 @@
     left: 300px;
 }
 
-.theme-list-layout::-webkit-scrollbar-thumb{ 
+.theme-list::-webkit-scrollbar-thumb{ 
     /* 스크롤바 막대 높이 설정 */ 
     height: 17%; 
     background-color: #b4b4b4;

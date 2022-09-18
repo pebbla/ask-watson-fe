@@ -1,10 +1,10 @@
 @import "../../styles/common.scss";
 
-.cafe-page-layout {
+.notice-page-layout {
     margin-left: $sidebar-width;
     padding: 40px;
 
-    .add-cafe-btn {
+    .add-notice-btn {
         background-color: black;
         position: fixed;
         bottom: 80px;
@@ -30,13 +30,13 @@
     }
 }
 
-.cafe-search-section {
+.notice-search-section {
     width: 100%;
     margin-bottom: 40px;
     display: flex;
 }
 
-.cafe-search-bar {
+.notice-search-bar {
     border: 1px solid $light-grey;
     border-radius: 5px;
     width: 900px;
@@ -64,7 +64,7 @@
     }
 }
 
-.cafe-search-btn {
+.notice-search-btn {
     border: 1px solid balck;
     border-radius: 5px;
     width: 151px;
