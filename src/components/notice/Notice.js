@@ -11,7 +11,7 @@ function Notice({notice}) {
     var date = (notice.createdAt == null) ? " " : notice.createdAt;
     var content = (notice.content == null) ? " " : notice.content;
     date = date.substring(0, 10)
-    if(content.length > 178) content = content.substring(0, 166) + "..."
+    if(content.length > 165) content = content.substring(0, 163) + "..."
 
     return <div className="notice-layout" >
         {/* <NavLink to={`/notices/info?cid=${notice.id}`}> */}

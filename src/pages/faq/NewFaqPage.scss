@@ -1,0 +1,90 @@
+@import "../../styles/common.scss";
+
+.new-faq-page-layout {
+    margin-left: $sidebar-width;
+    padding: 40px;
+    padding-top: 50px;;
+    position: relative;
+
+    h1 {
+        font-size: 26px;
+        font-weight: bold;
+        margin-right: 50px;
+    }
+
+    .page-title {
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
+    .title-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+
+        input {
+            flex: 0.95;
+            font-size: 26px;
+            padding:11px;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid $grey;
+
+            &:focus {
+                outline: 1px solid black;
+            }
+        }
+
+    }
+
+    .content-section {
+        display: flex;
+        margin-bottom: 50px;
+
+        h1 {
+            margin-top: 10px;
+        }
+
+        textarea {
+            flex: 0.95;
+            padding: 11px;
+            font-size: 16px;
+            resize: none;
+            width: 430px;
+            height: 410px;
+            outline: none;
+            border: 1px solid $grey;
+            border-radius: 5px;
+            line-height: 1.6;
+
+            &:focus {
+                outline: 1px solid black;
+            }
+        }
+    }
+
+    .add-faq-btn {
+        position: absolute;
+        bottom:0px;
+        right:90px;
+        border: 1px solid balck;
+        border-radius: 5px;
+        width: 151px;
+        height: 51px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        color: white;
+    
+        h1 {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+    
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

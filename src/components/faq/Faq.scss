@@ -1,0 +1,46 @@
+@import "../../styles/common.scss";
+
+.faq-layout {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $light-grey;
+    display: block;
+    width: 100%;
+    height: 135px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .faq-title {
+        display: flex;
+        font-size: 30px;
+        margin-bottom: 30px;
+
+        h1 {
+            font-weight: bold;
+            margin-right: 20px;
+        }
+    }
+
+    .faq-date {
+        margin-bottom: 20px;
+        color: #969696;
+    }
+
+    .faq-content {
+        display: flex;
+        line-height: 1.6;
+
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        h3 {
+            margin-top: 10px;
+        }
+    }
+
+}
