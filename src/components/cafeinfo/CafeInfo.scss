@@ -36,7 +36,7 @@
             left: $sidebar-width + 9px;
             color: white;
             font-size: 28px;
-            z-index: 6;
+            z-index: 1;
 
             &:hover {
                 cursor: pointer;
@@ -84,7 +84,7 @@
 
     input {
         height: fit-content;
-        z-index: 5;
+        // z-index: 5;
     }
 
     h1 {
@@ -113,7 +113,7 @@
         border-radius: 5px;
         right: 10px;
         width: 150px;
-        z-index: 5;
+        // z-index: 5;
 
         h2 {
             font-size: 16px;
