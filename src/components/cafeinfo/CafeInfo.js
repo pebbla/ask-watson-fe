@@ -39,9 +39,9 @@ function CafeInfo({cafe}) {
 
     const [isEditingCafe, setEditingCafe] = useState(false)
     const [locationMenus, setLocationMenus] = useState([])
-
     const [cafeNameTxt, setCafeNameTxt] = useState(cafe.cafeName)
-    const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafe.cafePhoneNum)
+    var cafePhoneNum = (cafe.cafePhoneNum == null || cafe.cafePhoneNum === "") ? "-" : cafe.cafePhoneNum
+    const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafePhoneNum)
     const [locationId, setLocationId] = useState(cafe.location.id)
     const [englishPossibleYn, setEnglishPossibleYn] = useState(cafe.englishPossible)
     const [cafeAddressTxt, setCafeAddressTxt] = useState(cafe.address)
@@ -257,7 +257,7 @@ function CafeInfo({cafe}) {
                 <h2>주소</h2>
             </div>
             <div className="cafe-info__content">
-                <h2>{cafe.cafePhoneNum}</h2>
+                <h2>{cafePhoneNum}</h2>
                 <h2>{cafe.location.state} | {cafe.location.city}</h2>
                 <h2>{cafe.rating}</h2>
                 {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
