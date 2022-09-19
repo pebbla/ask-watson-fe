@@ -208,7 +208,7 @@ function CafeInfo({cafe}) {
                         value="가능"
                         name="englishPossibleYn"
                         type="radio"
-                        checked={englishPossibleYn === true}
+                        checked={englishPossibleYn}
                         onChange={handleChangeOnEngPosRadioBtn} />
                     <label htmlFor="engPos">가능</label>
 
@@ -216,7 +216,7 @@ function CafeInfo({cafe}) {
                         value="불가능"
                         name="englishPossibleYn"
                         type="radio"
-                        checked={englishPossibleYn === false}
+                        checked={englishPossibleYn}
                         onChange={handleChangeOnEngPosRadioBtn} />
                     <label htmlFor="engImpos">불가능</label>
                 </div>
