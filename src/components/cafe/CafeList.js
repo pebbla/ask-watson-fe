@@ -11,7 +11,7 @@ function CafeList({searchWord}) {
     };
 
     const [cafeList, setCafeList] = useState([])
-    const [isSortedByUpdate, setSortByUpdate] = useState(false)
+    const [isSortedByUpdate, setSortByUpdate] = useState(true)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {getCafeList()}, [isSortedByUpdate])

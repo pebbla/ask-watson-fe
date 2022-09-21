@@ -150,7 +150,7 @@ function ThemePopup({theme, onClose, isOpen}) {
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className='image-and-unchangable-info'>
                     <div className='image-section'>
-                        <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme"/></div>
+                        <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme" fileId={theme.id}/></div>
                         { themeImageUrl !== "" ? <img className="theme-image" src={themeImageUrl} alt={themeNameTxt} /> : <div></div>}
                     </div>
                     <div className='unchangable-info'>
@@ -208,7 +208,7 @@ function ThemePopup({theme, onClose, isOpen}) {
                                 onKeyPress={onEnterKeyPressBlur}/></div>
                         <textarea className="editing-theme__input" value = {themeExplanationTxt} 
                                 onChange={(e) => changeTxt(e, setThemeExplanationTxt)} 
-                                onKeyPress={onEnterKeyPressBlur}
+                                // onKeyPress={onEnterKeyPressBlur}
                         />
                     </div>
                 </div>

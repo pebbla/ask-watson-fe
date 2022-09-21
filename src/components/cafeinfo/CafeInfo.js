@@ -156,7 +156,7 @@ function CafeInfo({cafe}) {
     ? <div className="cafe-info-layout">
         <div className="image-section">
             {isEditingCafe
-                ? <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe"/></div>
+                ? <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe" fileId={cafe.id}/></div>
                 : <div></div>
             }
             <img src={cafeImageUrl} alt={cafe.cafeName} />
@@ -243,7 +243,7 @@ function CafeInfo({cafe}) {
                 <div className="editing-cafe__input">
                     <textarea value = {cafeAddressTxt} 
                         onChange={(e) => changeTxt(e, setCafeAddressTxt)} 
-                        onKeyPress={onEnterKeyPressBlur}
+                        // onKeyPress={onEnterKeyPressBlur}
                         />
                 </div>
             </div>

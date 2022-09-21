@@ -11,7 +11,7 @@ function ThemeList({searchWord}) {
     };
 
     const [themeList, setThemeList] = useState([])
-    const [isSortedByUpdate, setSortByUpdate] = useState(false)
+    const [isSortedByUpdate, setSortByUpdate] = useState(true)
 
     useEffect(() => {getThemeList()}, [isSortedByUpdate])
 
