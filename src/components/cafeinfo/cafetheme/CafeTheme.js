@@ -15,10 +15,10 @@ function CafeTheme({theme}) {
         setModalOpen(false)
     }
     
-    return <div className="cafe-info-theme-layout">
+    return <div className="cafe-info-theme-layout" onClick={openPopup}>
         <div className="theme-title-section">
             <h1>{theme.themeName}</h1>
-            <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} onClick={openPopup}/>
+            <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} />
             <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
         </div>
         <div className="theme-info-section">
