@@ -30,7 +30,7 @@ function CategorySelectBox({categories, handleChange}) {
 	)
 }
 
-function NewThemePopup({cafeId, onClose, isOpen}) {
+function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
@@ -73,7 +73,7 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
         else if(themePrice == null) window.alert("가격을 입력해주세요.")
         else await axios
-            .post("http://localhost:8080/v1/admin/cafes/"+cafeId+"/themes",
+            .put("http://localhost:8080/v1/admin/themes/"+themeId,
             {
                 themeName: themeNameTxt,
                 themeExplanation: themeExplanationTxt,
@@ -106,11 +106,8 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className="image-bg">
-                <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme"/></div>
+                <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme" fileId={themeId}/></div>
                     { themeImageUrl !== "" ? <img className="theme-image" src={themeImageUrl} alt={themeNameTxt} /> : <div></div>}
-                    {/* {themeImageUrl === ""
-                    ? <h6>사진 추가하기</h6>
-                    : <img className="theme-image" src={""} alt={themeNameTxt} />} */}
                 </div>
                 <div className="theme-changable-info">
                     <div className="theme-info__title">
@@ -137,7 +134,6 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
                                 onKeyPress={onEnterKeyPressBlur}/></div>
                         <textarea className="editing-theme__input" value = {themeExplanationTxt} 
                                 onChange={(e) => changeTxt(e, setThemeExplanationTxt)} 
-                                onKeyPress={onEnterKeyPressBlur}
                         />
                     </div>
                 </div>

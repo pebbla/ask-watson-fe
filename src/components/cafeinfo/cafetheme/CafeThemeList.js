@@ -11,9 +11,17 @@ function CafeThemeList({cafeId}) {
 
     const [themeList, setThemeList] = useState([])
     const [isModalOpen, setModalOpen] = useState(false)
+    const [newThemeId, setNewThemeId] = useState()
 
-    const openPopup = () => {
-        setModalOpen(true)
+    async function openPopup() {
+        await axios
+        .post("http://localhost:8080/v1/admin/cafes/" + cafeId + "/themes/new", {}, config)
+        .then((response) => {
+            console.error(response.data['data'])
+            setNewThemeId(response.data['data']);
+            setModalOpen(true)
+        })
+        .catch((error) => {console.error(error);});
     }
 
     const onClose = () => {
@@ -41,7 +49,7 @@ function CafeThemeList({cafeId}) {
             <div className="add-theme-btn" onClick={openPopup}>
                 <h2>테마 추가하기</h2>
             </div>
-            <NewThemePopup cafeId={cafeId} onClose={onClose} isOpen={isModalOpen}/>
+            <NewThemePopup cafeId={cafeId} themeId={newThemeId} onClose={onClose} isOpen={isModalOpen}/>
         </div>
         <div className="themes-info-list-section">
             {themeList.map((theme) => {

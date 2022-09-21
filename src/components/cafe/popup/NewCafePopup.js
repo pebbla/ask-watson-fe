@@ -75,7 +75,7 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
         else if(cafeLongitude == null) window.alert("경도를 입력해주세요.")
         else if(cafeLatitude == null) window.alert("위도를 입력해주세요.")
         else await axios
-            .post("http://localhost:8080/v1/admin/cafes",
+            .put("http://localhost:8080/v1/admin/cafes/" + cafeId,
             {
                 cafeName: cafeNameTxt,
                 cafePhoneNum: cafePhoneNumTxt,
@@ -112,7 +112,7 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="카페 제목을 입력해주세요."/></div>
                 <div className="cafe-image-bg">
-                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe"/></div>
+                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe" fileId={cafeId}/></div>
                     { cafeImageUrl !== "" ? <img className="cafe-image" src={cafeImageUrl} alt={cafeNameTxt} /> : <div></div>}
                 </div>
                 <div className="cafe-changable-info">
@@ -160,7 +160,7 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                                 step="0.000000000000000000000001"/></div>
                         <textarea className="editing-cafe__input" value = {cafeAddressTxt} 
                                 onChange={(e) => changeTxt(e, setCafeAddressTxt)} 
-                                onKeyPress={onEnterKeyPressBlur}
+                                // onKeyPress={onEnterKeyPressBlur}
                         />
                     </div>
                 </div>
