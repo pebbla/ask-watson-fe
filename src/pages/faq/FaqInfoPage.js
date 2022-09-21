@@ -116,7 +116,6 @@ function FaqInfoPage() {
                     <h1>내용</h1>
                     <textarea value={contentTxt}
                         onChange={(e) => changeTxt(e, setContentTxt)}
-                        onKeyPress={onEnterKeyPressBlur}
                         placeholder="내용을 입력해주세요"
                         maxLength={2000} />
                 </div><div className="btns">
