@@ -7,6 +7,10 @@
     padding-top:5px;
     padding-bottom: 10px;
     border-bottom: 1px solid $light-grey;
+    
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .cafe-info-theme-layout .theme-title-section {

@@ -49,6 +49,10 @@
 @media screen and (max-width:1400px){ 
     .cafe-info-layout {
         width: 380px;
+        
+        .cafe-delete-btn {
+            width: 380px;
+        }
 
         .image-section {
             width: 385px;
@@ -181,10 +185,10 @@
 }
 
 .cafe-delete-btn {
-    position: absolute;
+    position:fixed;
     bottom: 0;
     background-color: rgb(159, 20, 20);
-    width: 100%;
+    width: 555px;
     height: 54px;
     display: flex;
     justify-content: center;
