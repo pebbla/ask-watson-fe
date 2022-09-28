@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ReportList.scss"
+import ReportPopup from "./popup/ReportPopup.js";
 
 function ReportList({searchWord}) {
     var config = {
@@ -8,6 +9,15 @@ function ReportList({searchWord}) {
     };
 
     const [reportList, setReportList] = useState([])
+    const [isModalOpen, setModalOpen] = useState(false)
+
+    const openPopup = () => {
+        setModalOpen(true)
+    }
+
+    const onClose = () => {
+        setModalOpen(false)
+    }
 
     useEffect(() => {getReportList()}, [])
 
@@ -42,11 +52,19 @@ function ReportList({searchWord}) {
                     date = date.substring(0, 10);
 
                     return <tr>
+                        <ReportPopup report={report} onClose={onClose} isOpen={isModalOpen}/>
                         <td>{report.id}</td>
-                        <td>{report.content}</td>
+                        <td className="report-contents">{report.content}</td>
                         <td>{report.reportedUser.userNickname}</td>
                         <td>{date}</td>
-                        <td>{report.handledYn ? "처리완료" : "처리하기"}</td>
+                        <td className="handle-btns">{report.handledYn 
+                            ? <div className="handle-btn handled" >
+                                <h2>처리완료</h2>
+                            </div>
+                            : <div className="handle-btn not-yet-handled" onClick={openPopup}>
+                                <h2>처리하기</h2>
+                            </div>}
+                        </td>
                     </tr>
                 })}
             </tbody>
