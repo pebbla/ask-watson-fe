@@ -1,0 +1,101 @@
+@import "../../../styles/common.scss";
+
+.user-popup-screen{
+    height: 100%;
+    
+    .bg {
+        background-color: #00000060;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.user-popup-layout {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 350px;
+    background-color: white;
+    padding: 40px;
+    
+    position: relative;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    h1 {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 35px;
+    }
+
+    .user-delete-btn {
+        margin: 10px;
+        margin-bottom: 0;
+        height: 51px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        right: 10px;
+        background-color: $red;
+
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .faX {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 25px;
+        color: $grey;
+    }
+}
+
+/* 스크롤바 너비 설정 */ 
+.user-popup-layout::-webkit-scrollbar{ 
+    width: 6px; 
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.user-popup-layout::-webkit-scrollbar-thumb{ 
+    /* 스크롤바 막대 높이 설정 */ 
+    height: 17%; 
+    background-color: #b4b4b4;
+
+    /* 스크롤바 둥글게 설정 */ 
+    border-radius: 10px; 
+} 
+
+.user-info {
+    display: flex;
+    padding-bottom: 50px;
+
+    .user-info__part {
+        display: flex;
+        flex: 0.5;
+        line-height: 1.8;
+
+        .user-info__title {
+            font-weight: bold;
+            width: 150px;
+        }
+
+        .user-info__content {
+            flex: 1;
+        }
+    }
+}

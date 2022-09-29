@@ -1,0 +1,20 @@
+@import "../../styles/common.scss";
+
+.user-info-btn {
+    width: 88px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: black;
+
+    h2 {
+        font-size: 14px;
+        color: white;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

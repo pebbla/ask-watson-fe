@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { NavLink } from 'react-router-dom';
 import axios from "axios"
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -79,9 +80,11 @@ function ReportPopup({report, onClose, isOpen}) {
         <div className='bg' onClick={onClose}>
             <div className='report-popup-layout' onClick={(e) => e.stopPropagation()}>
                 <h1>신고 처리하기</h1>
-                <div className="user-manage-btn" onClick={() => goUserManagementScreen()}>
-                    <h4>회원 퇴출하러가기</h4>
-                </div>
+                <NavLink to={`/users?searchWord=${report.reportedUser.userNickname}`}>
+                    <div className="user-manage-btn" onClick={() => goUserManagementScreen()}>
+                        <h4>회원 퇴출하러가기</h4>
+                    </div>
+                </NavLink>
                 <FontAwesomeIcon className="faX" icon={faX} onClick={onClose}/>
                 <div className='report-info border-bottom-lg'>
                     <div className='report-info__part'>
@@ -101,7 +104,7 @@ function ReportPopup({report, onClose, isOpen}) {
                     <div className='report-info__part'>
                         
                         <div className='report-info__title'>
-                            
+                            <h2>ㅤ</h2>
                             <h2>신고한 회원 ID</h2> 
                             <h2>신고한 회원 닉네임</h2> 
                             <h2>방탈출 테마</h2> 
