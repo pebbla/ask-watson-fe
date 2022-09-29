@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ReportList.scss"
+import Report from "./Report.js";
 
 function ReportList({searchWord}) {
     var config = {
@@ -38,16 +39,10 @@ function ReportList({searchWord}) {
             </thead>
             <tbody>
                 {reportList.map(report => {
-                    var date = (report.createdAt == null) ? " " : report.createdAt;
-                    date = date.substring(0, 10);
-
-                    return <tr>
-                        <td>{report.id}</td>
-                        <td>{report.content}</td>
-                        <td>{report.reportedUser.userNickname}</td>
-                        <td>{date}</td>
-                        <td>{report.handledYn ? "처리완료" : "처리하기"}</td>
-                    </tr>
+                    return <Report 
+                        key = {report.id}
+                        report={report} 
+                    />
                 })}
             </tbody>
         </table>

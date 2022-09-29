@@ -1,38 +1,71 @@
 @import "../../styles/common.scss";
 
-.faq-list-layout {
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    width: 97%;
-    height: 670px;
-    margin-top: 50px;
-    padding-left: 15px;
-    padding-right: 50px;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+.report-list-layout {
+    .report-table { 
+        border-collapse: collapse; 
+        width: 100%;
+
+        tr { 
+            border-top: 1px solid $grey; 
+            border-bottom: 1px solid $grey; 
+            
+            
+            th {
+                padding: 10px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                font-weight: bold;
+            }
+
+            td {
+                padding: 10px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                text-align: center;
+
+                &:nth-child(1) {
+
+                }
+
+                
+            }
+
+            .report-contents {
+                display: flex;
+                width: 700px;
+            }
+
+            .handle-btns {
+                display: flex;
+                justify-content: center;
+
+                .handle-btn {
+                    width: 88px;
+                    height: 32px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;;
+
+                    h2 {
+                        font-size: 14px;
+                        color: white;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .handled {
+                    background-color: $grey;
+                }
+
+                .not-yet-handled {
+                    background-color: black;
+                }
+            }
+
+        }
+    }
 }
-
-/* 스크롤바 너비 설정 */ 
-.faq-list-layout::-webkit-scrollbar{ 
-    width: 6px; 
-    float: right;
-    position: absolute;
-    top: 0;
-    left: 300px;
-}
-
-.faq-list-layout::-webkit-scrollbar-thumb{ 
-    /* 스크롤바 막대 높이 설정 */ 
-    height: 17%; 
-    background-color: #b4b4b4;
-
-    /* 스크롤바 둥글게 설정 */ 
-    border-radius: 10px; 
-} 
-
-/* 스크롤바 뒷 배경 설정*/ 
-// .faq-list-layout::-webkit-scrollbar-track{
-//     margin-right: 1000px;
-//     background-color: rgba(0,0,0,0); 
-// }
