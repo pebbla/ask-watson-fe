@@ -29,58 +29,50 @@ function ReportPopup({report, onClose, isOpen}) {
         return confirmAction;
     };
 
-    async function deleteConfirm() {
-        window.location.reload();
-        deleteReport()
+    async function deleteReviewConfirm() {
+        await deleteReview()
+        await handleComplete()
+        window.location.reload()
+    }
+
+    async function handleCompleteConfirm() {
+        await handleComplete()
+        window.location.reload()
     }
 
     const cancelConfirm = () => console.log("취소했습니다.")
 
-    const confirmDelete = useConfirm(
-        "테마를 삭제하시겠습니까?",
-        deleteConfirm,
+    const confirmReviewDelete = useConfirm(
+        "리뷰를 삭제하시겠습니까?",
+        deleteReviewConfirm,
         cancelConfirm
     );
 
-    async function deleteReport() {
+    const confirmHandleComplete = useConfirm(
+        "신고 처리를 완료하시겠습니까?",
+        handleCompleteConfirm,
+        cancelConfirm
+    );
+
+    async function deleteReview() {
         await axios
-            .delete("http://localhost:8080/v1/admin/reports/" + report.id, config)
+            .delete("http://localhost:8080/v1/reviews/" + report.review.id, config)
             .then((response) => {
                 console.log(response.data)
             })
             .catch((error) => {console.error(error);});
     }
 
-    function changeTxt(e, txtSetter) {
-        e.preventDefault();
-        txtSetter(e.target.value);
+    async function handleComplete() {
+        await axios
+        .patch("http://localhost:8080/v1/admin/reports/" + report.id + "?handledYn=true", {}, config)
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error) => {console.error(error);});
     }
 
     async function goUserManagementScreen() {
-        // console.log("ThemePopup: " + themeImageUrl)
-        // if(themeNameTxt === "") window.alert("테마 제목을 입력해주세요.")
-        // else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
-        // else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
-        // else if(themePrice == null) window.alert("가격을 입력해주세요.")
-        // else await axios
-        //     .put("http://localhost:8080/v1/admin/themes/" + theme.id,
-        //     {
-        //         themeName: themeNameTxt,
-        //         themeExplanation: themeExplanationTxt,
-        //         categoryId: themeCategoryId,
-        //         timeLimit: themeTimeLimit,
-        //         minNumPeople: themeMinNumPeople,
-        //         price: themePrice,
-        //         reservationUrl: themeReservationUrlTxt,
-        //         imageUrl: themeImageUrl,
-        //         difficulty: theme.difficulty
-        //     }, config)
-        //     .then((response) => {
-        //         window.location.reload();
-        //         console.log(response.data['data']);
-                
-        //     })
-        //     .catch((error) => {console.error(error);});
     }
 
     return <Modal className='report-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
@@ -132,15 +124,21 @@ function ReportPopup({report, onClose, isOpen}) {
                 </div>
                 <div className="report-popup-buttons">
                     {report.handledYn
-                        ? 
+                        ? <div className="btn unhandlable-btn" >
+                            <h2>처리 완료</h2>
+                        </div>
+                        : <div className="btn handle-complete-btn" onClick={() => confirmHandleComplete()}>
+                            <h2>처리 완료하기</h2>
+                        </div>
                     }
-                    <div className="btn handle-complete-btn" onClick={() => goUserManagementScreen()}>
-                        <h2>처리 완료하기</h2>
-                    </div>
-                    <div className="btn delete-review-btn" onClick={() => confirmDelete()}>
-                        <h2>리뷰 삭제하기</h2>
-                    </div>
-                    
+                    {report.review == null
+                        ? <div className="btn unhandlable-btn" >
+                            <h2>리뷰 삭제 완료</h2>
+                        </div>
+                        : <div className="btn delete-review-btn" onClick={() => confirmReviewDelete()}>
+                            <h2>리뷰 삭제하기</h2>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

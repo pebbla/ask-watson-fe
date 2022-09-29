@@ -161,8 +161,15 @@
     }
 
     .handle-complete-btn {
-        
         background-color: black;
+    }
+
+    .unhandlable-btn {
+        background-color: $grey;
+        
+        &:hover {
+            cursor: default;
+        }
     }
 
     .delete-review-btn {

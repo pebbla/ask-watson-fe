@@ -32,7 +32,7 @@
 
             .report-contents {
                 display: flex;
-                // justify-content: flex-start;
+                width: 700px;
             }
 
             .handle-btns {
@@ -51,6 +51,10 @@
                         font-size: 14px;
                         color: white;
                     }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
 
                 .handled {
@@ -59,31 +63,9 @@
 
                 .not-yet-handled {
                     background-color: black;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
                 }
             }
 
         }
     }
 }
-
-// /* 스크롤바 너비 설정 */ 
-// .report-list-layout::-webkit-scrollbar{ 
-//     width: 6px; 
-//     float: right;
-//     position: absolute;
-//     top: 0;
-//     left: 300px;
-// }
-
-// .report-list-layout::-webkit-scrollbar-thumb{ 
-//     /* 스크롤바 막대 높이 설정 */ 
-//     height: 17%; 
-//     background-color: #b4b4b4;
-
-//     /* 스크롤바 둥글게 설정 */ 
-//     border-radius: 10px; 
-// } 
