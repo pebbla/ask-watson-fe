@@ -4,7 +4,7 @@ import ReportPopup from "./popup/ReportPopup.js";
 
 function Report({report}) {
     var date = (report.createdAt == null) ? " " : report.createdAt;
-                    date = date.substring(0, 10);
+    date = date.substring(0, 10);
     const [isModalOpen, setModalOpen] = useState(false)
 
     const openPopup = () => {
