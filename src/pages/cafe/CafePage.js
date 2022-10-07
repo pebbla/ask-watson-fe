@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CafeList from "../../components/cafe/CafeList.js";
 import "./CafePage.scss"
@@ -10,21 +9,9 @@ function CafePage() {
     const [searchWord, setSearchWord] = useState("")
     const [searchTxt, setSearchTxt] = useState("");
     const [isModalOpen, setModalOpen] = useState(false)
-    const [newCafeId, setNewCafeId] = useState(null)
 
     async function openPopup () {
-        var config = {
-            headers: { 'Content-Type': 'application/json' }
-        };
-
-        await axios
-            .post("http://localhost:8080/v1/admin/cafes/new", {}, config)
-            .then((response) => {
-                console.error(response.data['data'])
-                setNewCafeId(response.data['data']);
-                setModalOpen(true)
-            })
-            .catch((error) => {console.error(error);});
+        setModalOpen(true)
     }
 
     const onClose = () => {
@@ -61,7 +48,7 @@ function CafePage() {
         <div className="add-cafe-btn" onClick={openPopup}>
             <h2>+</h2>
         </div>
-        <NewCafePopup cafeId={newCafeId} onClose={onClose} isOpen={isModalOpen}/>
+        <NewCafePopup onClose={onClose} isOpen={isModalOpen}/>
         <CafeList key = {searchWord} searchWord={searchWord}/>
     </div>;
 }
