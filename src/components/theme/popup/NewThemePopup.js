@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./NewThemePopup.scss"
-import GoogleStorageFileUploader from '../../../apis/gcs/GoogleStorageFileUploader.js';
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -30,7 +29,7 @@ function CategorySelectBox({categories, handleChange}) {
 	)
 }
 
-function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
+function NewThemePopup({cafeId, onClose, isOpen}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
@@ -45,6 +44,7 @@ function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
     const [themePrice, setThemePrice] = useState()
     const [themeReservationUrlTxt, setThemeReservationUrlTxt] = useState("")
     const [themeImageUrl, setThemeImageUrl] = useState("")
+    const [themeImageFile, setThemeImageFile] = useState(null)
 
     const handleChangeOnLocationSelectBox = (e) => {
         setThemeCategoryId(e.target.value)
@@ -72,9 +72,10 @@ function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
         else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
         else if(themePrice == null) window.alert("가격을 입력해주세요.")
-        else await axios
-            .put("http://localhost:8080/v1/admin/themes/"+themeId,
-            {
+        else {
+            let formData = new FormData()
+
+            let jsonData = {
                 themeName: themeNameTxt,
                 themeExplanation: themeExplanationTxt,
                 categoryId: themeCategoryId,
@@ -82,20 +83,31 @@ function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
                 minNumPeople: themeMinNumPeople,
                 price: themePrice,
                 reservationUrl: themeReservationUrlTxt,
-                imageUrl: themeImageUrl,
-                difficulty: 0
-            }, config)
+                imageUrl: ""
+            }
+
+            formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
+            formData.append("file", themeImageFile)
+
+            await axios
+            .post("http://localhost:8080/v1/admin/cafes/" + cafeId + "/themes", formData)
             .then((response) => {
                 window.location.reload();
                 console.log(response.data['data']);
             })
             .catch((error) => {console.error(error);});
+        }
     }
 
     function changeTxt(e, txtSetter) {
         e.preventDefault();
         txtSetter(e.target.value);
     }
+
+    const setThumbnail = (e) => {
+        setThemeImageUrl(URL.createObjectURL(e.target.files[0]))
+        setThemeImageFile(e.target.files[0])
+    };
 
     return <Modal className='new-theme-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
@@ -106,7 +118,9 @@ function NewThemePopup({cafeId, themeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className="image-bg">
-                <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setThemeImageUrl} dstFolder="theme" fileId={themeId}/></div>
+                <div className="file-uploader-layout">
+                    <input type="file" name="image_file" onChange={setThumbnail}></input>
+                </div>
                     { themeImageUrl !== "" ? <img className="theme-image" src={themeImageUrl} alt={themeNameTxt} /> : <div></div>}
                 </div>
                 <div className="theme-changable-info">

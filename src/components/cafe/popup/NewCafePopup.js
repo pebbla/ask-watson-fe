@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./NewCafePopup.scss"
-import GoogleStorageFileUploader from '../../../apis/gcs/GoogleStorageFileUploader.js';
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -30,7 +29,7 @@ function LocationSelectBox({locations, handleChange}) {
 	)
 }
 
-function NewCafePopup({cafeId, onClose, isOpen}) {
+function NewCafePopup({onClose, isOpen}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
@@ -46,6 +45,7 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
     const [cafeLongitude, setCafeLongitude] = useState()
     const [cafeLatitude, setCafeLatitude] = useState()
     const [cafeImageUrl, setCafeImageUrl] = useState("")
+    const [cafeImageFile, setCafeImageFile] = useState(null)
 
     const handleChangeOnLocationSelectBox = (e) => {
         setCafeLocationId(e.target.value)
@@ -74,24 +74,32 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
         else if(cafeLocationId == null) window.alert("카페 위치를 선택해주세요.")
         else if(cafeLongitude == null) window.alert("경도를 입력해주세요.")
         else if(cafeLatitude == null) window.alert("위도를 입력해주세요.")
-        else await axios
-            .put("http://localhost:8080/v1/admin/cafes/" + cafeId,
-            {
+        else {
+            let formData = new FormData()
+
+            let jsonData = {
                 cafeName: cafeNameTxt,
                 cafePhoneNum: cafePhoneNumTxt,
                 website: cafeWebsiteTxt,
                 address: cafeAddressTxt,
-                imageUrl: cafeImageUrl,
+                imageUrl: "",
                 locationId: cafeLocationId,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: cafeEnglishPossibleYn
-            }, config)
+            }
+            
+            formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
+            formData.append("file", cafeImageFile)
+
+            await axios
+            .post("http://localhost:8080/v1/admin/cafes", formData)
             .then((response) => {
                 window.location.reload();
                 console.log(response.data['data']);
             })
             .catch((error) => {console.error(error);});
+        }
     }
 
     function changeTxt(e, txtSetter) {
@@ -103,6 +111,11 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
         setCafeEnglishPossibleYn(e.target.value === "가능")
     }
 
+    const setThumbnail = (e) => {
+        setCafeImageUrl(URL.createObjectURL(e.target.files[0]))
+        setCafeImageFile(e.target.files[0])
+    };
+
     return <Modal className='cafe-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
             <div className='cafe-popup-layout' onClick={(e) => e.stopPropagation()}>
@@ -112,7 +125,9 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="카페 제목을 입력해주세요."/></div>
                 <div className="cafe-image-bg">
-                    <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe" fileId={cafeId}/></div>
+                    <div className="file-uploader-layout">
+                        <input type="file" name="image_file" onChange={setThumbnail}></input>
+                    </div>
                     { cafeImageUrl !== "" ? <img className="cafe-image" src={cafeImageUrl} alt={cafeNameTxt} /> : <div></div>}
                 </div>
                 <div className="cafe-changable-info">
@@ -160,7 +175,6 @@ function NewCafePopup({cafeId, onClose, isOpen}) {
                                 step="0.000000000000000000000001"/></div>
                         <textarea className="editing-cafe__input" value = {cafeAddressTxt} 
                                 onChange={(e) => changeTxt(e, setCafeAddressTxt)} 
-                                // onKeyPress={onEnterKeyPressBlur}
                         />
                     </div>
                 </div>

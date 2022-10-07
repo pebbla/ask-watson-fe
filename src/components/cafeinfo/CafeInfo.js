@@ -4,7 +4,6 @@ import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faPencil } from "@fortawesome/free-solid-svg-icons"
 import "./CafeInfo.scss"
-import GoogleStorageFileUploader from "../../apis/gcs/GoogleStorageFileUploader.js"
 
 function onEnterKeyPressBlur(e) {
     if(e.key === 'Enter') {
@@ -49,6 +48,8 @@ function CafeInfo({cafe}) {
     const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
     const [cafeLatitude, setCafeLatitude] = useState(cafe.geography.latitude)
     const [cafeImageUrl, setCafeImageUrl] = useState(cafe.imageUrl)
+    const [isImageFileModified, setImageFileModified] = useState(false)
+    const [cafeImageFile, setCafeImageFile] = useState(null)
 
     useEffect(() => {init()}, [])
     
@@ -73,25 +74,32 @@ function CafeInfo({cafe}) {
         else if(locationId == null) window.alert("카페 위치를 선택해주세요.")
         else if(cafeLongitude == null) window.alert("경도를 입력해주세요.")
         else if(cafeLatitude == null) window.alert("위도를 입력해주세요.")
-        else await axios
-            .put("http://localhost:8080/v1/admin/cafes/" + cafe.id,
-            {
+        else {
+            let formData = new FormData()
+
+            let jsonData = {
                 cafeName: cafeNameTxt,
                 cafePhoneNum: cafePhoneNumTxt,
                 website: cafeWebsiteTxt,
                 address: cafeAddressTxt,
-                imageUrl: cafeImageUrl,
+                imageUrl: cafe.imageUrl,
                 locationId: locationId,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
                 isEnglishPossible: englishPossibleYn
-            }, config)
+            }
+            
+            formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
+            if(isImageFileModified) formData.append("file", cafeImageFile)
+
+            await axios
+            .put("http://localhost:8080/v1/admin/cafes/" + cafe.id, formData)
             .then((response) => {
                 window.location.reload();
                 console.log(response.data['data']);
             })
             .catch((error) => {console.error(error);});
-            
+        }
     }
 
     async function deleteCafe() {
@@ -152,11 +160,19 @@ function CafeInfo({cafe}) {
         txtSetter(e.target.value);
     }
 
+    const setThumbnail = (e) => {
+        setCafeImageUrl(URL.createObjectURL(e.target.files[0]))
+        setCafeImageFile(e.target.files[0])
+        setImageFileModified(true)
+    };
+
     return cafe != null 
     ? <div className="cafe-info-layout">
         <div className="image-section">
             {isEditingCafe
-                ? <div className="file-uploader-layout"><GoogleStorageFileUploader setUrl={setCafeImageUrl} dstFolder="cafe" fileId={cafe.id}/></div>
+                ? <div className="file-uploader-layout">
+                    <input type="file" name="image_file" onChange={setThumbnail}></input>
+                </div>
                 : <div></div>
             }
             <img src={cafeImageUrl} alt={cafe.cafeName} />
@@ -242,9 +258,7 @@ function CafeInfo({cafe}) {
                 </div>
                 <div className="editing-cafe__input">
                     <textarea value = {cafeAddressTxt} 
-                        onChange={(e) => changeTxt(e, setCafeAddressTxt)} 
-                        // onKeyPress={onEnterKeyPressBlur}
-                        />
+                        onChange={(e) => changeTxt(e, setCafeAddressTxt)} />
                 </div>
             </div>
         </div>

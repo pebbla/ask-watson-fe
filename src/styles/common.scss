@@ -3,3 +3,21 @@ $grey: #B7B7B7;
 $red: rgb(159, 20, 20);
 
 $sidebar-width: 250px;
+
+.file-uploader-layout {
+    position: absolute;
+    background-color: #FFFFFF30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    form {
+        margin-left: 10px;
+    }
+
+    input {
+        width: 200px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+    }
+}
