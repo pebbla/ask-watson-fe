@@ -5,7 +5,10 @@ function Cafe({cafe}) {
 
     return <div className="cafe-layout">
         <NavLink to={`/cafes/info?cid=${cafe.id}`}>
-        <h1 className="cafe-name">{cafe.id}. {cafe.cafeName}</h1>
+        <div className="cafe-name">
+            <h1>{cafe.id}. {cafe.cafeName}</h1>
+            {cafe.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}
+        </div>
         <div className="cafe-info-section">
             <div className="cafe-image"><img src={cafe.imageUrl} alt={cafe.cafeName} /></div>
             <div className="cafe-info">
@@ -21,7 +24,7 @@ function Cafe({cafe}) {
                     <h2>{cafe.location.state} | {cafe.location.city}</h2>
                     <h2>{cafe.rating}</h2>
                     <h2>{cafe.reviewCount}</h2>
-                    {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
+                    {cafe.isEnglishPossible ? <h2>O</h2> : <h2>X</h2>}
                 </div>
             </div>
         </div>

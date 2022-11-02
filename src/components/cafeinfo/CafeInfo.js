@@ -42,7 +42,8 @@ function CafeInfo({cafe}) {
     var cafePhoneNum = (cafe.cafePhoneNum == null || cafe.cafePhoneNum === "") ? "-" : cafe.cafePhoneNum
     const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafePhoneNum)
     const [locationId, setLocationId] = useState(cafe.location.id)
-    const [englishPossibleYn, setEnglishPossibleYn] = useState(cafe.englishPossible)
+    const [englishPossibleYn, setEnglishPossibleYn] = useState(cafe.isEnglishPossible)
+    const [cafeAvailable, setCafeAvailable] = useState(cafe.available);
     const [cafeAddressTxt, setCafeAddressTxt] = useState(cafe.address)
     const [cafeWebsiteTxt, setCafeWebsiteTxt] = useState(cafe.website)
     const [cafeLongitude, setCafeLongitude] = useState(cafe.geography.longitude)
@@ -86,7 +87,8 @@ function CafeInfo({cafe}) {
                 locationId: locationId,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
-                isEnglishPossible: englishPossibleYn
+                isEnglishPossible: englishPossibleYn,
+                isAvailable: cafeAvailable
             }
             
             formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
@@ -155,6 +157,10 @@ function CafeInfo({cafe}) {
         setEnglishPossibleYn(e.target.value === "가능")
     }
 
+    const handleChangeOnAvailabilityRadioBtn = (e) => {
+        setCafeAvailable(e.target.value === "가능")
+    }
+
     function changeTxt(e, txtSetter) {
         e.preventDefault();
         txtSetter(e.target.value);
@@ -185,7 +191,10 @@ function CafeInfo({cafe}) {
                 onKeyPress={onEnterKeyPressBlur}
                 placeholder = {cafe.cafeName}
                 />
-            : <h1>{cafe.cafeName}</h1>}
+            : <div className="cafe-name">
+                <h1>{cafe.cafeName}</h1>
+                {cafe.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}
+            </div>}
             {isEditingCafe
             ? <div className="modify-cafe-btn" onClick={() => onClickEditingDone()}>
                 <h2>수정완료</h2>
@@ -199,6 +208,7 @@ function CafeInfo({cafe}) {
                 <h2>지역</h2>
                 <h2>별점</h2>
                 <h2>영어가능</h2>
+                <h2>이용가능</h2>
                 <h2>웹사이트</h2>
                 <h2>경도 X</h2>
                 <h2>위도 Y</h2>
@@ -236,6 +246,23 @@ function CafeInfo({cafe}) {
                         onChange={handleChangeOnEngPosRadioBtn} />
                     <label htmlFor="engImpos">불가능</label>
                 </div>
+                <div className="english-possible-radio-section editing-cafe__input">
+                            <input id="available"
+                                value="가능"
+                                name="availability"
+                                type="radio"
+                                checked={cafeAvailable === true}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="available">가능</label>
+
+                            <input id="unavailable"
+                                value="불가능"
+                                name="availability"
+                                type="radio"
+                                checked={cafeAvailable === false}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="unavailable">불가능</label>
+                        </div>
                 <div className="editing-cafe__input">
                     <input type="text" value={ cafeWebsiteTxt } 
                             onChange={(e) => changeTxt(e, setCafeWebsiteTxt)} 
@@ -268,13 +295,15 @@ function CafeInfo({cafe}) {
                 <h2>지역</h2>
                 <h2>별점</h2>
                 <h2>영어가능</h2>
+                <h2>이용가능</h2>
                 <h2>주소</h2>
             </div>
             <div className="cafe-info__content">
                 <h2>{cafePhoneNum}</h2>
                 <h2>{cafe.location.state} | {cafe.location.city}</h2>
                 <h2>{cafe.rating}</h2>
-                {cafe.englishPossible ? <h2>O</h2> : <h2>X</h2>}
+                {cafe.isEnglishPossible ? <h2>O</h2> : <h2>X</h2>}
+                {cafe.available ? <h2>O</h2> : <h2>X</h2>}
                 <h2>{cafe.address}</h2>
             </div>
         </div>}
