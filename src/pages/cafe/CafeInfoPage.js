@@ -13,9 +13,25 @@ function CafeInfoPage() {
     };
 
     const [cafe, setCafe] = useState(null)
+    const [locationMenus, setLocationMenus] = useState([])
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {getCafeInfo()}, [])
+    useEffect(() => {init()}, [])
+    
+    async function init() {
+        getLocations()
+        getCafeInfo()
+    }
+
+    async function getLocations() {
+        await axios
+        .get("http://localhost:8080/v1/locations", config)
+        .then(response => {
+            setLocationMenus(response.data['data']);
+        })
+        .catch((error) => {
+            console.error("ERROR: " + error);
+        })
+    }
 
     async function getCafeInfo() {
         await axios
@@ -30,9 +46,9 @@ function CafeInfoPage() {
 
     return <div className = "cafe-info-page-layout">
         { cafe!==null 
-        ? <CafeInfo cafe = {cafe} />
+        ? <CafeInfo cafe = {cafe} locations={locationMenus}/>
         : <div></div>}
-        <CafeThemeList cafeId = {cafeIdObj.cid} />
+        <CafeThemeList cafeId = {cafeIdObj.cid}/>
     </div>;
 }
 

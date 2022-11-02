@@ -29,7 +29,7 @@ function LocationSelectBox({locations, defaultValue, handleChange}) {
 	)
 }
 
-function CafeInfo({cafe}) {
+function CafeInfo({cafe, locations}) {
     let navigate = useNavigate();
     
     var config = {
@@ -37,7 +37,6 @@ function CafeInfo({cafe}) {
     };
 
     const [isEditingCafe, setEditingCafe] = useState(false)
-    const [locationMenus, setLocationMenus] = useState([])
     const [cafeNameTxt, setCafeNameTxt] = useState(cafe.cafeName)
     var cafePhoneNum = (cafe.cafePhoneNum == null || cafe.cafePhoneNum === "") ? "-" : cafe.cafePhoneNum
     const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafePhoneNum)
@@ -51,23 +50,6 @@ function CafeInfo({cafe}) {
     const [cafeImageUrl, setCafeImageUrl] = useState(cafe.imageUrl)
     const [isImageFileModified, setImageFileModified] = useState(false)
     const [cafeImageFile, setCafeImageFile] = useState(null)
-
-    useEffect(() => {init()}, [])
-    
-    async function init() {
-        getLocations()
-    }
-
-    async function getLocations() {
-        await axios
-        .get("http://localhost:8080/v1/locations", config)
-        .then(response => {
-            setLocationMenus(response.data['data']);
-        })
-        .catch((error) => {
-            console.error("ERROR: " + error);
-        })
-    }
 
     async function modifyCafeInfo() {
         if(cafeNameTxt === "") window.alert("카페 이름을 입력해주세요.")
@@ -223,9 +205,9 @@ function CafeInfo({cafe}) {
                             />
                     </div>
                     : <div></div>}
-                {locationMenus !== []
+                {locations !== []
                     ? <div className="editing-cafe__input">
-                        <LocationSelectBox locations = {locationMenus} defaultValue = {cafe.location.id} handleChange = {handleChangeOnLocationSelectBox}/>
+                        <LocationSelectBox locations = {locations} defaultValue = {cafe.location.id} handleChange = {handleChangeOnLocationSelectBox}/>
                     </div>
                     : <div></div>}
                 <h2>{cafe.rating}</h2>

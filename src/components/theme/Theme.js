@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ThemePopup from "./popup/ThemePopup.js";
 import "./Theme.scss"
-function Theme({theme}) {
+function Theme({theme, categories}) {
     const [isModalOpen, setModalOpen] = useState(false)
 
     const openPopup = () => {
@@ -13,7 +13,7 @@ function Theme({theme}) {
     }
 
     return <div className="theme-layout" onClick={openPopup}>
-        <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
+        <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen} categories={categories}/>
         <div className="theme-name">
             <h1>{theme.id}. {theme.themeName}</h1>
             {theme.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}

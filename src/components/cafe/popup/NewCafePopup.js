@@ -29,13 +29,7 @@ function LocationSelectBox({locations, handleChange}) {
 	)
 }
 
-function NewCafePopup({onClose, isOpen}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
-    
-    const [locationMenus, setLocationMenus] = useState([])
-
+function NewCafePopup({onClose, isOpen, locations}) {
     const [cafeNameTxt, setCafeNameTxt] = useState("")
     const [cafeLocationId, setCafeLocationId] = useState()
     const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState("")
@@ -50,23 +44,6 @@ function NewCafePopup({onClose, isOpen}) {
 
     const handleChangeOnLocationSelectBox = (e) => {
         setCafeLocationId(e.target.value)
-    }
-
-    useEffect(() => {init()}, [])
-
-    async function init() {
-        getLocations();
-    }
-
-    async function getLocations() {
-        await axios
-        .get("http://localhost:8080/v1/locations", config)
-        .then(response => {
-            setLocationMenus(response.data['data']);
-        })
-        .catch((error) => {
-            console.error("ERROR: " + error);
-        })
     }
 
     async function addCafe() {
@@ -151,7 +128,7 @@ function NewCafePopup({onClose, isOpen}) {
                         <div className="editing-cafe__input"><input type="text" value={ cafePhoneNumTxt } 
                                 onChange={(e) => changeTxt(e, setCafePhoneNumTxt)} 
                                 onKeyPress={onEnterKeyPressBlur}/></div>
-                        <div className="editing-cafe__input"><LocationSelectBox  locations = {locationMenus} handleChange = {handleChangeOnLocationSelectBox}/></div>
+                        <div className="editing-cafe__input"><LocationSelectBox  locations = {locations} handleChange = {handleChangeOnLocationSelectBox}/></div>
                         <div className="english-possible-radio-section editing-cafe__input">
                             <input id="engPos"
                                 value="가능"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from "axios"
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,13 +29,7 @@ function CategorySelectBox({categories, handleChange}) {
 	)
 }
 
-function NewThemePopup({cafeId, onClose, isOpen}) {
-    var config = {
-        headers: { 'Content-Type': 'application/json' }
-    };
-    
-    const [categoryItems, setCategoryItems] = useState([])
-
+function NewThemePopup({cafeId, onClose, isOpen, categories}) {
     const [themeNameTxt, setThemeNameTxt] = useState("")
     const [themeCategoryId, setThemeCategoryId] = useState()
     const [themeExplanationTxt, setThemeExplanationTxt] = useState("")
@@ -49,23 +43,6 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
 
     const handleChangeOnLocationSelectBox = (e) => {
         setThemeCategoryId(e.target.value)
-    }
-
-    useEffect(() => {init()}, [])
-
-    async function init() {
-        getCategories();
-    }
-
-    async function getCategories() {
-        await axios
-        .get("http://localhost:8080/v1/categories", config)
-        .then(response => {
-            setCategoryItems(response.data['data']);
-        })
-        .catch((error) => {
-            console.error("ERROR: " + error);
-        })
     }
 
     async function addTheme() {
@@ -140,7 +117,7 @@ function NewThemePopup({cafeId, onClose, isOpen}) {
                         <h2>테마설명</h2>
                     </div>
                     <div className="theme-info__inputs">
-                        <div className="editing-theme__input"><CategorySelectBox  categories = {categoryItems} handleChange = {handleChangeOnLocationSelectBox}/></div>
+                        <div className="editing-theme__input"><CategorySelectBox categories = {categories} handleChange = {handleChangeOnLocationSelectBox}/></div>
                         <div className="editing-theme__input"><input type="number" value={ themeTimeLimit } 
                                 onChange={(e) => changeTxt(e, setThemeTimeLimit)} 
                                 onKeyPress={onEnterKeyPressBlur}/> 분</div>
