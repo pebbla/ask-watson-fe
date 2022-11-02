@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import "./ThemeList.scss"
 
-function ThemeList({searchWord}) {
+function ThemeList({searchWord, categories}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
@@ -59,6 +59,7 @@ function ThemeList({searchWord}) {
             return <Theme 
                 key = {theme.id}
                 theme = {theme}
+                categories = {categories}
             />
         })}
         </div>

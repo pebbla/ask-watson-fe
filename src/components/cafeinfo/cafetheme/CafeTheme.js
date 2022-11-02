@@ -4,7 +4,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import ThemePopup from "../../../components/theme/popup/ThemePopup.js";
 import "./CafeTheme.scss"
 
-function CafeTheme({theme}) {
+function CafeTheme({theme, categories}) {
     const [isModalOpen, setModalOpen] = useState(false)
 
     const openPopup = () => {
@@ -22,7 +22,7 @@ function CafeTheme({theme}) {
                 {theme.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}
             </div>
             <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} />
-            <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
+            <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen} categories={categories}/>
         </div>
         <div className="theme-info-section">
             <img className="theme-image" src={theme.imageUrl} alt={theme.themeName} />
