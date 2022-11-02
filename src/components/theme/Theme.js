@@ -14,7 +14,10 @@ function Theme({theme}) {
 
     return <div className="theme-layout" onClick={openPopup}>
         <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
-        <h1 className="theme-name">{theme.id}. {theme.themeName}</h1>
+        <div className="theme-name">
+            <h1>{theme.id}. {theme.themeName}</h1>
+            {theme.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}
+        </div>
         <div className="theme-info-section">
             <div className="theme-image"><img src={theme.imageUrl} alt={theme.themeName} /></div>
             <div className="theme-info">

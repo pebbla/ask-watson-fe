@@ -46,6 +46,7 @@ function NewCafePopup({onClose, isOpen}) {
     const [cafeLatitude, setCafeLatitude] = useState()
     const [cafeImageUrl, setCafeImageUrl] = useState("")
     const [cafeImageFile, setCafeImageFile] = useState(null)
+    const [cafeAvailable, setCafeAvailable] = useState(true);
 
     const handleChangeOnLocationSelectBox = (e) => {
         setCafeLocationId(e.target.value)
@@ -86,7 +87,8 @@ function NewCafePopup({onClose, isOpen}) {
                 locationId: cafeLocationId,
                 longitude: cafeLongitude,
                 latitude: cafeLatitude,
-                isEnglishPossible: cafeEnglishPossibleYn
+                isEnglishPossible: cafeEnglishPossibleYn,
+                isAvailable: cafeAvailable
             }
             
             formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
@@ -109,6 +111,10 @@ function NewCafePopup({onClose, isOpen}) {
 
     const handleChangeOnEngPosRadioBtn = (e) => {
         setCafeEnglishPossibleYn(e.target.value === "가능")
+    }
+
+    const handleChangeOnAvailabilityRadioBtn = (e) => {
+        setCafeAvailable(e.target.value === "가능")
     }
 
     const setThumbnail = (e) => {
@@ -135,6 +141,7 @@ function NewCafePopup({onClose, isOpen}) {
                         <h2>전화번호</h2>
                         <h2>지역</h2>
                         <h2>영어가능</h2>
+                        <h2>이용가능</h2>
                         <h2>웹사이트</h2>
                         <h2>경도 X</h2>
                         <h2>위도 Y</h2>
@@ -161,6 +168,23 @@ function NewCafePopup({onClose, isOpen}) {
                                 checked={cafeEnglishPossibleYn === false}
                                 onChange={handleChangeOnEngPosRadioBtn} />
                             <label htmlFor="engImpos">불가능</label>
+                        </div>
+                        <div className="english-possible-radio-section editing-cafe__input">
+                            <input id="available"
+                                value="가능"
+                                name="availability"
+                                type="radio"
+                                checked={cafeAvailable === true}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="available">가능</label>
+
+                            <input id="unavailable"
+                                value="불가능"
+                                name="availability"
+                                type="radio"
+                                checked={cafeAvailable === false}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="unavailable">불가능</label>
                         </div>
                         <div className="editing-cafe__input"><input type="text" value={ cafeWebsiteTxt } 
                                 onChange={(e) => changeTxt(e, setCafeWebsiteTxt)} 

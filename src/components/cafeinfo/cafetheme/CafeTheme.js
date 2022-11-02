@@ -17,7 +17,10 @@ function CafeTheme({theme}) {
     
     return <div className="cafe-info-theme-layout" onClick={openPopup}>
         <div className="theme-title-section">
-            <h1>{theme.themeName}</h1>
+            <div className="theme-name">
+                <h1>{theme.themeName}</h1>
+                {theme.available ? <div></div> : <h1 className="unavailable-warning">      이용 불가능</h1>}
+            </div>
             <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} />
             <ThemePopup theme={theme} onClose={onClose} isOpen={isModalOpen}/>
         </div>

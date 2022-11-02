@@ -44,6 +44,7 @@ function ThemePopup({theme, onClose, isOpen}) {
     const [themePrice, setThemePrice] = useState(theme.price)
     const [themeReservationUrlTxt, setThemeReservationUrlTxt] = useState(theme.reservationUrl)
     const [themeImageUrl, setThemeImageUrl] = useState(theme.imageUrl)
+    const [themeAvailable, setThemeAvailable] = useState(theme.available);
     const [isImageFileModified, setImageFileModified] = useState(false)
     const [themeImageFile, setThemeImageFile] = useState(null)
     
@@ -86,7 +87,8 @@ function ThemePopup({theme, onClose, isOpen}) {
                 minNumPeople: themeMinNumPeople,
                 price: themePrice,
                 reservationUrl: themeReservationUrlTxt,
-                imageUrl: theme.imageUrl
+                imageUrl: theme.imageUrl,
+                isAvailable: themeAvailable
             }
 
             formData.append("params", new Blob([JSON.stringify(jsonData)], {type: "application/json"}))
@@ -154,6 +156,10 @@ function ThemePopup({theme, onClose, isOpen}) {
         setImageFileModified(true)
     };
 
+    const handleChangeOnAvailabilityRadioBtn = (e) => {
+        setThemeAvailable(e.target.value === "가능")
+    }
+
     return <Modal className='theme-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
             <div className='theme-popup-layout' onClick={(e) => e.stopPropagation()}>
@@ -206,6 +212,7 @@ function ThemePopup({theme, onClose, isOpen}) {
                         <h2>최소인원수</h2>
                         <h2>가격</h2>
                         <h2>예약 URL</h2>
+                        <h2>이용가능</h2>
                         <h2>테마설명</h2>
                     </div>
                     <div className="theme-info__inputs">
@@ -222,9 +229,25 @@ function ThemePopup({theme, onClose, isOpen}) {
                         <div className="editing-theme__input"><input type="text" value={ themeReservationUrlTxt } 
                                 onChange={(e) => changeTxt(e, setThemeReservationUrlTxt)} 
                                 onKeyPress={onEnterKeyPressBlur}/></div>
+                                <div className="english-possible-radio-section editing-cafe__input">
+                            <input id="available"
+                                value="가능"
+                                name="availability"
+                                type="radio"
+                                checked={themeAvailable === true}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="available">가능</label>
+
+                            <input id="unavailable"
+                                value="불가능"
+                                name="availability"
+                                type="radio"
+                                checked={themeAvailable === false}
+                                onChange={handleChangeOnAvailabilityRadioBtn} />
+                            <label htmlFor="unavailable">불가능</label>
+                        </div>
                         <textarea className="editing-theme__input" value = {themeExplanationTxt} 
                                 onChange={(e) => changeTxt(e, setThemeExplanationTxt)} 
-                                // onKeyPress={onEnterKeyPressBlur}
                         />
                     </div>
                 </div>
