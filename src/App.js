@@ -13,6 +13,7 @@ import FaqPage from "./pages/faq/FaqPage.js";
 import FaqInfoPage from "./pages/faq/FaqInfoPage.js";
 import NewFaqPage from "./pages/faq/NewFaqPage.js";
 import ReportPage from "./pages/report/ReportPage.js";
+import SuggestionPage from "./pages/suggestion/SuggestionPage.js";
 import UserPage from "./pages/user/UserPage.js";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/faqs/new" element={<NewFaqPage />} />
         <Route path="/users" element={<UserPage />} />
         <Route path="/reports" element={<ReportPage />} />
+        <Route path="/suggestions" element={<SuggestionPage />} />
       </Routes>
     </BrowserRouter>
   );

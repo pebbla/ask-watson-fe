@@ -11,6 +11,7 @@ function SideBar() {
         { name: "FAQ", path: "/faqs" },
         { name: "회원 관리", path: "/users" },
         { name: "신고 처리", path: "/reports" },
+        { name: "건의", path: "/suggestions" }
     ]
 
     return (
