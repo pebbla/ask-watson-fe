@@ -69,6 +69,30 @@
 .image-and-unchangable-info {
     margin-bottom: 20px;
 
+    .move_to_cafe-btn {
+        height: 30px;
+        width: 120px;
+        margin-bottom: 10px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        top: 28px;
+        right: 70px;
+        flex: 1;
+        background-color: black;
+
+        h4 {
+            font-size: 12px;
+            color: white;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     .image-section {
         position: absolute;
         top: 110px;

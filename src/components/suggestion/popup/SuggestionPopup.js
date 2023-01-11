@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 import axios from "axios"
-import Modal from 'react-modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import Modal from 'react-modal'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 import "./SuggestionPopup.scss"
 
 function SuggestionPopup({suggestion, onClose, isOpen}) {
@@ -75,15 +75,12 @@ function SuggestionPopup({suggestion, onClose, isOpen}) {
         .catch((error) => {console.error(error);});
     }
 
-    async function goUserManagementScreen() {
-    }
-
     return <Modal className='suggestion-popup-screen' isOpen = {isOpen} ariaHideApp={false}>
         <div className='bg' onClick={onClose}>
             <div className='suggestion-popup-layout' onClick={(e) => e.stopPropagation()}>
                 <h1>건의 처리하기</h1>
                 <NavLink to={`/cafes/info?cid=${suggestion.cafeId}`}>
-                    <div className="user-manage-btn" onClick={() => goUserManagementScreen()}>
+                    <div className="move_to_cafe-btn">
                         <h4>카페로 이동하기</h4>
                     </div>
                 </NavLink>

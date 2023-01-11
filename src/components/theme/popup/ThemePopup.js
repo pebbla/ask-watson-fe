@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import axios from "axios"
 import Modal from 'react-modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 import "./ThemePopup.scss"
 
 function onEnterKeyPressBlur(e) {
@@ -48,7 +49,6 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
     }
 
     async function modifyThemeInfo() {
-        console.log("ThemePopup: " + themeImageUrl)
         if(themeNameTxt === "") window.alert("테마 제목을 입력해주세요.")
         else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
@@ -146,6 +146,11 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className='image-and-unchangable-info'>
+                    <NavLink to={`/cafes/info?cid=${theme.cafe.id}`}>
+                        <div className="move_to_cafe-btn">
+                            <h4>카페로 이동하기</h4>
+                        </div>
+                    </NavLink>
                     <div className='image-section'>
                         <div className="file-uploader-layout">
                             <input type="file" name="image_file" onChange={setThumbnail}></input>
