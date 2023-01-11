@@ -18,9 +18,9 @@ function Report({report}) {
     return <tr>
         <ReportPopup report={report} onClose={onClose} isOpen={isModalOpen}/>
         <td>{report.id}</td>
+        <td>{date}</td>
         <td className="report-contents">{report.content}</td>
         <td>{report.reportedUser.userNickname}</td>
-        <td>{date}</td>
         <td className="handle-btns">{report.handledYn 
             ? <div className="handle-btn handled" onClick={openPopup}>
                 <h2>처리완료</h2>

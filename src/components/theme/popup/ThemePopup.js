@@ -13,28 +13,22 @@ function onEnterKeyPressBlur(e) {
 }
 
 function CategorySelectBox({categories, defaultValue, handleChange}) {
-    
-    return (
-		<select onChange={handleChange}>
-			{categories && categories.map((category) => (
-				<option
-					key={category.id}
-					value={category.id}
-					defaultValue={defaultValue === category.value}
-				>
-					{category.categoryName}
-				</option>
-			))}
-		</select>
-	)
+    return <select onChange={handleChange}>
+        {categories && categories.map((category) => (
+        (defaultValue === category.id)
+        ? <option selected key={category.id} value={category.id}>
+            {category.categoryName}
+        </option>
+        : <option key={category.id} value={category.id}>
+            {category.categoryName}
+        </option>))}
+    </select>
 }
 
 function ThemePopup({theme, onClose, isOpen, categories}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
-    
-    // const [categoryItems, setCategoryItems] = useState([])
 
     const [themeNameTxt, setThemeNameTxt] = useState(theme.themeName)
     const [themeCategoryId, setThemeCategoryId] = useState(theme.category.id)
@@ -52,23 +46,6 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
     const handleChangeOnCategorySelectBox = (e) => {
         setThemeCategoryId(e.target.value)
     }
-
-    // useEffect(() => {init()}, [])
-
-    // async function init() {
-    //     getCategories();
-    // }
-
-    // async function getCategories() {
-    //     await axios
-    //     .get("http://localhost:8080/v1/categories", config)
-    //     .then(response => {
-    //         setCategoryItems(response.data['data']);
-    //     })
-    //     .catch((error) => {
-    //         console.error("ERROR: " + error);
-    //     })
-    // }
 
     async function modifyThemeInfo() {
         console.log("ThemePopup: " + themeImageUrl)
@@ -217,7 +194,7 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
                     </div>
                     <div className="theme-info__inputs">
                         <div className="editing-theme__input">
-                            <CategorySelectBox  categories = {categories} defaultValue = {theme.category.id} handleChange = {handleChangeOnCategorySelectBox}/></div>
+                            <CategorySelectBox  categories = {categories} defaultValue = { themeCategoryId } handleChange = {handleChangeOnCategorySelectBox}/></div>
                         <div className="editing-theme__input"><input type="number" value={ themeTimeLimit } 
                                 onChange={(e) => changeTxt(e, setThemeTimeLimit)} 
                                 onKeyPress={onEnterKeyPressBlur}/> 분</div>
