@@ -42,7 +42,7 @@ function CafeThemeList({cafeId}) {
 
     async function getCafeThemes() {
         await axios
-            .get("http://localhost:8080/v1/cafes/" + cafeId + "/themes" , config)
+            .get("http://localhost:8080/v1/admin/cafes/" + cafeId + "/themes" , config)
             .then(response => {
                 setThemeList(response.data['data']);
                 console.log(response.data['data']);
