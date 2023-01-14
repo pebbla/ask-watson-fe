@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Report.scss"
-import ReportPopup from "./popup/ReportPopup.js";
+import "./Suggestion.scss"
+import SuggestionPopup from "./popup/SuggestionPopup.js";
 
-function Report({report}) {
-    var date = (report.createdAt == null) ? " " : report.createdAt;
+function Suggestion({suggestion}) {
+    var date = (suggestion.createdAt == null) ? " " : suggestion.createdAt;
     date = date.substring(0, 10);
     const [isModalOpen, setModalOpen] = useState(false)
 
@@ -16,12 +16,12 @@ function Report({report}) {
     }
 
     return <tr>
-        <ReportPopup report={report} onClose={onClose} isOpen={isModalOpen}/>
-        <td>{report.id}</td>
+        <SuggestionPopup suggestion={suggestion} onClose={onClose} isOpen={isModalOpen}/>
+        <td>{suggestion.id}</td>
         <td>{date}</td>
-        <td className="report-contents">{report.content}</td>
-        <td>{report.reportedUser.userNickname}</td>
-        <td className="handle-btns">{report.handledYn 
+        <td className="suggestion-contents">{suggestion.content}</td>
+        <td>[{suggestion.cafeId}] {suggestion.cafeName}</td>
+        <td className="handle-btns">{suggestion.handledYn 
             ? <div className="handle-btn handled" onClick={openPopup}>
                 <h2>처리완료</h2>
             </div>
@@ -32,4 +32,4 @@ function Report({report}) {
     </tr>
 }
 
-export default Report;
+export default Suggestion;

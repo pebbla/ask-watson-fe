@@ -119,27 +119,27 @@ function ReportPopup({report, onClose, isOpen}) {
                 </div>
                 <div className="report-content border-bottom-lg">
                     <h2>리뷰내용</h2>
-                    <h6>{ report.review.content }</h6>
+                    <h6>{ report.reviewContent }</h6>
                 </div>
                 <div className="report-content">
                     <h2>신고내용</h2>
                     <h6>{ report.content }</h6>
                 </div>
                 <div className="report-popup-buttons">
-                    {report.handledYn
-                        ? <div className="btn unhandlable-btn" >
-                            <h2>처리 완료</h2>
-                        </div>
-                        : <div className="btn handle-complete-btn" onClick={() => confirmHandleComplete()}>
-                            <h2>처리 완료하기</h2>
-                        </div>
-                    }
                     {report.review == null
                         ? <div className="btn unhandlable-btn" >
                             <h2>리뷰 삭제 완료</h2>
                         </div>
                         : <div className="btn delete-review-btn" onClick={() => confirmReviewDelete()}>
                             <h2>리뷰 삭제하기</h2>
+                        </div>
+                    }
+                    {report.handledYn
+                        ? <div className="btn unhandlable-btn" >
+                            <h2>처리 완료</h2>
+                        </div>
+                        : <div className="btn handle-complete-btn" onClick={() => confirmHandleComplete()}>
+                            <h2>처리 완료하기</h2>
                         </div>
                     }
                 </div>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import axios from "axios"
 import Modal from 'react-modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 import "./ThemePopup.scss"
 
 function onEnterKeyPressBlur(e) {
@@ -13,28 +14,22 @@ function onEnterKeyPressBlur(e) {
 }
 
 function CategorySelectBox({categories, defaultValue, handleChange}) {
-    
-    return (
-		<select onChange={handleChange}>
-			{categories && categories.map((category) => (
-				<option
-					key={category.id}
-					value={category.id}
-					defaultValue={defaultValue === category.value}
-				>
-					{category.categoryName}
-				</option>
-			))}
-		</select>
-	)
+    return <select onChange={handleChange}>
+        {categories && categories.map((category) => (
+        (defaultValue === category.id)
+        ? <option selected key={category.id} value={category.id}>
+            {category.categoryName}
+        </option>
+        : <option key={category.id} value={category.id}>
+            {category.categoryName}
+        </option>))}
+    </select>
 }
 
 function ThemePopup({theme, onClose, isOpen, categories}) {
     var config = {
         headers: { 'Content-Type': 'application/json' }
     };
-    
-    // const [categoryItems, setCategoryItems] = useState([])
 
     const [themeNameTxt, setThemeNameTxt] = useState(theme.themeName)
     const [themeCategoryId, setThemeCategoryId] = useState(theme.category.id)
@@ -53,25 +48,7 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
         setThemeCategoryId(e.target.value)
     }
 
-    // useEffect(() => {init()}, [])
-
-    // async function init() {
-    //     getCategories();
-    // }
-
-    // async function getCategories() {
-    //     await axios
-    //     .get("http://localhost:8080/v1/categories", config)
-    //     .then(response => {
-    //         setCategoryItems(response.data['data']);
-    //     })
-    //     .catch((error) => {
-    //         console.error("ERROR: " + error);
-    //     })
-    // }
-
     async function modifyThemeInfo() {
-        console.log("ThemePopup: " + themeImageUrl)
         if(themeNameTxt === "") window.alert("테마 제목을 입력해주세요.")
         else if(themeCategoryId == null) window.alert("카테고리를 선택해주세요.")
         else if(themeTimeLimit == null) window.alert("제한시간을 입력해주세요.")
@@ -169,6 +146,11 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
                     onKeyPress={onEnterKeyPressBlur}
                     placeholder="테마 제목을 입력해주세요."/></div>
                 <div className='image-and-unchangable-info'>
+                    <NavLink to={`/cafes/info?cid=${theme.cafe.id}`}>
+                        <div className="move_to_cafe-btn">
+                            <h4>카페로 이동하기</h4>
+                        </div>
+                    </NavLink>
                     <div className='image-section'>
                         <div className="file-uploader-layout">
                             <input type="file" name="image_file" onChange={setThumbnail}></input>
@@ -217,7 +199,7 @@ function ThemePopup({theme, onClose, isOpen, categories}) {
                     </div>
                     <div className="theme-info__inputs">
                         <div className="editing-theme__input">
-                            <CategorySelectBox  categories = {categories} defaultValue = {theme.category.id} handleChange = {handleChangeOnCategorySelectBox}/></div>
+                            <CategorySelectBox  categories = {categories} defaultValue = { themeCategoryId } handleChange = {handleChangeOnCategorySelectBox}/></div>
                         <div className="editing-theme__input"><input type="number" value={ themeTimeLimit } 
                                 onChange={(e) => changeTxt(e, setThemeTimeLimit)} 
                                 onKeyPress={onEnterKeyPressBlur}/> 분</div>

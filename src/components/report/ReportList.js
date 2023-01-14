@@ -31,9 +31,9 @@ function ReportList({searchWord}) {
             <thead >
                 <tr>
                     <th>신고 ID</th>
+                    <th>신고 일시</th>
                     <th>내용</th>
                     <th>신고당한 회원</th>
-                    <th>신고 일시</th>
                     <th>신고 처리</th>
                 </tr>
             </thead>

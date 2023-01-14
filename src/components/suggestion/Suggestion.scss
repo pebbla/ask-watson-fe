@@ -1,0 +1,60 @@
+@import "../../styles/common.scss";
+
+.suggestion-layout {
+    tr { 
+        border-top: 1px solid $grey; 
+        border-bottom: 1px solid $grey; 
+        
+        
+        th {
+            padding: 10px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 10px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .suggestion-contents {
+            display: flex;
+            width: 700px;
+        }
+
+        .handle-btns {
+            display: flex;
+            justify-content: center;
+
+            .handle-btn {
+                width: 88px;
+                height: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;;
+
+                h2 {
+                    font-size: 14px;
+                    color: white;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .handled {
+                background-color: $grey;
+            }
+
+            .not-yet-handled {
+                background-color: black;
+            }
+        }
+
+    }
+}

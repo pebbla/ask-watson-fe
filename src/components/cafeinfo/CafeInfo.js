@@ -13,15 +13,14 @@ function onEnterKeyPressBlur(e) {
 }
 
 function LocationSelectBox({locations, defaultValue, handleChange}) {
-    
     return (
 		<select onChange={handleChange}>
-			{locations.map((location) => (
-				<option
-					key={location.id}
-					value={location.id}
-					defaultValue={defaultValue === location.value}
-				>
+			{locations && locations.map((location) => (
+                (defaultValue === location.id)
+				? <option selected key={location.id} value={location.id}>
+                    {location.state} | {location.city}
+				</option>
+                :<option key={location.id} value={location.id}>
 					{location.state} | {location.city}
 				</option>
 			))}
@@ -38,7 +37,7 @@ function CafeInfo({cafe, locations}) {
 
     const [isEditingCafe, setEditingCafe] = useState(false)
     const [cafeNameTxt, setCafeNameTxt] = useState(cafe.cafeName)
-    var cafePhoneNum = (cafe.cafePhoneNum == null || cafe.cafePhoneNum === "") ? "-" : cafe.cafePhoneNum
+    var cafePhoneNum = (cafe.cafePhoneNum == null || cafe.cafePhoneNum === "") ? "" : cafe.cafePhoneNum
     const [cafePhoneNumTxt, setCafePhoneNumTxt] = useState(cafePhoneNum)
     const [locationId, setLocationId] = useState(cafe.location.id)
     const [englishPossibleYn, setEnglishPossibleYn] = useState(cafe.isEnglishPossible)
@@ -281,7 +280,7 @@ function CafeInfo({cafe, locations}) {
                 <h2>주소</h2>
             </div>
             <div className="cafe-info__content">
-                <h2>{cafePhoneNum}</h2>
+                <h2>{ cafePhoneNum != null && cafePhoneNum !== "" ? cafePhoneNum : "-"}</h2>
                 <h2>{cafe.location.state} | {cafe.location.city}</h2>
                 <h2>{cafe.rating}</h2>
                 {cafe.isEnglishPossible ? <h2>O</h2> : <h2>X</h2>}
